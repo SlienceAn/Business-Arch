@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router'
 import { AiFillFolderOpen, AiFillFolder } from 'react-icons/ai';
 
 const TreeView = (props) => {
     const { data } = props
-    const [isShow, setShow] = useState(false)
+    const [isShow, setShow] = useState(true)
+    const router = useRouter()
     if (data['content'] && data.content.length !== 0) {
         return (
             <li className={data.body === "社會" ? "root" : ""}>
@@ -19,7 +21,9 @@ const TreeView = (props) => {
     } else {
         return (
             <li>
-                <span>{data.body}</span>
+                <span onClick={() => router.push("/TestRoute/" + data.body)}>
+                    {data.body}
+                </span>
             </li>
         )
     }

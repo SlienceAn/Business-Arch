@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import TreeView from '../components/TreeView'
 import Data from '../public/Data.json'
-export default function Home() {
+export default function App() {
   return (
     <div>
       <Head>

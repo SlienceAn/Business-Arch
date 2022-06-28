@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import TreeView from './components/TreeView'
+import TreeView from '../components/TreeView'
 import Data from '../public/Data.json'
 export default function Home() {
   return (

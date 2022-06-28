@@ -2,51 +2,45 @@ ul {
     margin: 0px 0px 0px 5px;
     list-style: none;
     line-height: 2em;
-    font-family: Arial;
+    font-family: "微軟正黑體";
 
     li {
         font-size: 16px;
         position: relative;
 
-        &:before {
+        &::before {
             position: absolute;
-            left: -15px;
+            content: "";
             top: 0px;
-            content: '';
+            left: -15px;
             display: block;
-            border-left: 1px solid rgb(0, 0, 0);
             height: 1em;
-            border-bottom: 1px solid rgb(0, 0, 0);
             width: 10px;
+            border-left: 1px solid;
+            border-bottom: 1px solid;
         }
 
-        &:after {
+        &::after {
             position: absolute;
+            content: "";
+            display: block;
+            height: 100%;
+            border-left: 1px solid;
             left: -15px;
             bottom: -7px;
-            content: '';
-            display: block;
-            border-left: 1px solid rgb(0, 0, 0);
-            height: 100%;
         }
 
         &.root {
             margin: 0px 0px 0px -5px;
 
-            &:before {
-                display: none;
-            }
-
-            &:after {
+            &::before,
+            &::after {
                 display: none;
             }
         }
 
-
-        &:last-child {
-            &:after {
-                display: none;
-            }
+        &:last-child::after {
+            display: none;
         }
     }
 }

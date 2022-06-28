@@ -1,62 +1,6 @@
 import Head from 'next/head'
 import TreeView from './components/TreeView'
-const data = {
-  body: "社會",
-  content: [
-    {
-      body: "低端社會",
-      content: [
-        {
-          body: "社會畜牲",
-          content: [
-            {
-              body: "加班牛",
-              content: [
-                {
-                  body: "做到死了",
-                  content: []
-                },
-                {
-                  body: "死了都要做",
-                  content: []
-                }
-              ]
-            },
-            {
-              body: "失業豬",
-              content: [],
-            },
-            {
-              body: "壓榨雞",
-              content: [],
-            }
-          ]
-        },
-        {
-          body: "社會蟑螂",
-          content: []
-        },
-        {
-          body: "社會米蟲",
-          content: []
-        }
-      ]
-    },
-    {
-      body: "高端社會",
-      content: [
-        {
-          body: "社會雲端",
-          content: []
-        },
-        {
-          body: "金字塔頂端",
-          content: []
-        }
-      ]
-    }
-  ]
-}
+import Data from '../public/Data.json'
 export default function Home() {
   return (
     <div>
@@ -67,7 +11,7 @@ export default function Home() {
       </Head>
       <div className='MainPanel'>
         <ul>
-          <TreeView data={data} />
+          <TreeView data={Data} />
         </ul>
       </div>
     </div>

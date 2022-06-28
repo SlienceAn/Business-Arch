@@ -7,14 +7,12 @@ const TreeView = (props) => {
             <li>
                 {data.body}
                 <ul>
-                    {data.content.map(el =>
-                        <li key={el.body}>
-                            <TreeView data={el} />
-                        </li>
-                    )}
+                    {data.content.map(el => <TreeView data={el} key={el.body} />)}
                 </ul>
             </li>
         )
+    } else {
+        return <ul></ul>
     }
 }
 export default TreeView;

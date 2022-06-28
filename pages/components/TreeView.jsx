@@ -7,12 +7,12 @@ const TreeView = (props) => {
     if (data.content.length !== 0) {
         return (
             <li className={data.body === "社會" ? "root" : ""} onClick={() => setShow(!isShow)}>
-                <div className="d-flex align-items-center gap-1 title-box">
+                <span className="d-flex align-items-center gap-1 title-box">
                     <AiFillFolderOpen />
                     <span>{data.body}</span>
-                </div>
+                </span>
                 <ul>
-                    {data.content.map(el => <TreeView data={el} key={el.body} />)}
+                    {data.content && data.content.map(el => <TreeView data={el} key={el.body} />)}
                 </ul>
             </li>
         )

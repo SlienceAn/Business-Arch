@@ -2,49 +2,51 @@
     cursor: pointer;
 }
 
-ul {
-    margin: 0px 0px 0px 5px;
-    list-style: none;
-    line-height: 2em;
-    font-family: "微軟正黑體";
+.TreePanel {
+    ul {
+        margin: 0px 0px 0px 5px;
+        list-style: none;
+        line-height: 2em;
+        font-family: "微軟正黑體";
 
-    li {
-        font-size: 16px;
-        position: relative;
+        li {
+            font-size: 16px;
+            position: relative;
 
-        &::before {
-            position: absolute;
-            content: "";
-            top: 0px;
-            left: -15px;
-            display: block;
-            height: 1em;
-            width: 10px;
-            border-left: 1px solid;
-            border-bottom: 1px solid;
-        }
+            &::before {
+                position: absolute;
+                content: "";
+                top: 0px;
+                left: -15px;
+                display: block;
+                height: 1em;
+                width: 10px;
+                border-left: 1px solid;
+                border-bottom: 1px solid;
+            }
 
-        &::after {
-            position: absolute;
-            content: "";
-            display: block;
-            height: 100%;
-            border-left: 1px solid;
-            left: -15px;
-            bottom: -7px;
-        }
-
-        &.root {
-            margin: 0px 0px 0px -5px;
-
-            &::before,
             &::after {
+                position: absolute;
+                content: "";
+                display: block;
+                height: 100%;
+                border-left: 1px solid;
+                left: -15px;
+                bottom: -7px;
+            }
+
+            &.root {
+                margin: 0px 0px 0px -5px;
+
+                &::before,
+                &::after {
+                    display: none;
+                }
+            }
+
+            &:last-child::after {
                 display: none;
             }
-        }
-
-        &:last-child::after {
-            display: none;
         }
     }
 }

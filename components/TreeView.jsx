@@ -7,7 +7,7 @@ const TreeView = (props) => {
     const router = useRouter()
     if (data['content'] && data.content.length !== 0) {
         return (
-            <li className={data.body === "社會" ? "root" : ""}>
+            <li className={data.body === "社會局" ? "root" : ""}>
                 <span className="d-flex align-items-center gap-1 title-box" onClick={() => setShow(!isShow)}>
                     <span>{data.body}</span>
                     {isShow ? <AiFillFolder /> : <AiFillFolderOpen />}

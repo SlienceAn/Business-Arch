@@ -6,8 +6,9 @@ import axios from 'axios'
 export default function App() {
   const [archData, setArch] = useState({})
   useEffect(() => {
-    axios.get("/api/hello").then(res =>
-      setArch(res.data))
+    axios.get("/api/hello").then(res => {
+      setArch(res.data)
+    })
   }, [])
   return (
     <div>

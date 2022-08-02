@@ -3,6 +3,9 @@
 }
 
 .TreePanel {
+    border-top: 1px solid;
+    padding-top: 15px;
+
     ul {
         margin: 0px 0px 0px 5px;
         list-style: none;
@@ -10,7 +13,7 @@
         font-family: "微軟正黑體";
 
         li {
-            font-size: 16px;
+            font-size: 20px;
             position: relative;
 
             &::before {

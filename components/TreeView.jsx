@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import { AiFillFolderOpen, AiFillFolder } from 'react-icons/ai';
+
 const TreeView = (props) => {
     const { data } = props
     const [isShow, setShow] = useState(true)
@@ -27,6 +28,5 @@ const TreeView = (props) => {
         )
     }
 }
-
-
 export default TreeView;
+

@@ -19,8 +19,8 @@ const InputModal = ({ children }) => {
                             {children}
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Save changes</button>
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                            <button type="button" className="btn btn-primary">確認</button>
                         </div>
                     </div>
                 </div>

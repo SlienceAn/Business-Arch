@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import InputModal from './InputModal';
 
 const ToolHead = ({ parentTitle }) => {
-    const [str, setStr] = useState("")
     return (
         <>
             <div className='w-100 py-2 px-4 d-flex justify-content-between'>
@@ -20,12 +18,16 @@ const ToolHead = ({ parentTitle }) => {
                 <input placeholder='search' />
             </div>
             <InputModal>
-                <select className='form-control'>
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                </select>
-                <input className='form-control' />
+                <div className='mb-3'>
+                    <label className='form-label' htmlFor='parentItem'>選擇父項</label>
+                    <select id='parentItem' className='form-control'>
+                        {parentTitle.map(el => <option key={el}>{el}</option>)}
+                    </select>
+                </div>
+                <div className='mb-3'>
+                    <label className='form-label' htmlFor='childItem'>添加子項</label>
+                    <input id='childItem' className='form-control' />
+                </div>
             </InputModal>
         </>
     );

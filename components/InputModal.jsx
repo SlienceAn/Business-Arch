@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-const InputModal = ({ children }) => {
+const InputModal = ({ postData, children }) => {
     const [element, setElement] = useState(null)
     useEffect(() => {
         typeof document !== undefined ? setElement(document.getElementById("modal")) : setEle(null)
@@ -20,7 +20,7 @@ const InputModal = ({ children }) => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-                            <button type="button" className="btn btn-primary">確認</button>
+                            <button type="button" className="btn btn-primary" onClick={postData}>確認</button>
                         </div>
                     </div>
                 </div>

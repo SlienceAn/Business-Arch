@@ -21,7 +21,7 @@ const TreeView = (props) => {
     } else {
         return (
             <li>
-                <span onClick={() => router.push("/TestRoute/" + data.body)}>
+                <span>
                     {data.body}
                 </span>
             </li>

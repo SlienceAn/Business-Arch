@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export const Context = createContext({})
 const arr = [];
+
 export const getAllBody = (body) => {
     Object.values(body).map(el => {
         if (Array.isArray(el)) {

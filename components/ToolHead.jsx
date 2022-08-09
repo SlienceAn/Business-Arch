@@ -2,12 +2,15 @@ import React, { useState, useContext } from 'react';
 import InputModal from './InputModal';
 import { Context } from '../public/lib';
 import { BsPlusCircleFill } from 'react-icons/bs';
+import ToolButton from './ToolButton';
 
 const ToolHead = ({ parentTitle }) => {
-    const [childVal, setChildVal] = useState([])
+    const [childVal, setChildVal] = useState([{
+        body: "",
+        content: []
+    }])
     const [parentVal, setParentVal] = useState("")
     const [context, setContext] = useContext(Context)
-
     const getValue = (event, cate, idx = 0) => {
         if (cate === "select") {
             setParentVal(event.target.value)
@@ -19,32 +22,31 @@ const ToolHead = ({ parentTitle }) => {
         }
     }
     const postData = () => {
-        const obj = {
-            body: parentVal,
-            content: childVal
-        }
-        setContext(obj)
+        setContext({ ...context, content: childVal })
     }
     return (
         <>
             <div className='w-100 py-2 px-4 d-flex justify-content-between'>
                 <div className='d-flex gap-2'>
-                    <button className='btn btn-success d-flex gap-2' data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button className='btn btn-primary d-flex gap-2' data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <i className="bi bi-pencil" />
                         <span>添加</span>
                     </button>
-                    <button className='btn btn-danger d-flex gap-2'>
-                        <i className="bi bi-x-square-fill" />
-                        <span>刪除</span>
-                    </button>
-                    <button className='btn btn-info d-flex gap-2'>
-                        <i className="bi bi-x-square-fill" />
-                        <span>存檔</span>
-                    </button>
-                    <button className='btn btn-info d-flex gap-2'>
-                        <i className="bi bi-x-square-fill" />
-                        <span>匯出圖片</span>
-                    </button>
+                    <ToolButton
+                        btnStyle="primary"
+                        icon="file-earmark-fill"
+                        text="存檔"
+                    />
+                    <ToolButton
+                        btnStyle="primary"
+                        icon="images"
+                        text="匯出圖片"
+                    />
+                    <ToolButton
+                        btnStyle="danger"
+                        icon="trash"
+                        text="刪除"
+                    />
                 </div>
                 <input placeholder='search' />
             </div>
@@ -57,17 +59,30 @@ const ToolHead = ({ parentTitle }) => {
                     </select>
                 </div>
                 <div className='mb-3'>
-                    <label className='form-label d-flex align-content-end gap-2' htmlFor='childItem'>
+                    <label
+                        className='form-label d-flex align-content-end gap-2'
+                        htmlFor='childItem'
+                        onClick={() => setChildVal([...childVal, {
+                            body: "",
+                            content: []
+                        }])}
+                    >
                         <span>添加子項</span>
                         <BsPlusCircleFill fontSize="1.5rem" />
                     </label>
                     {
                         childVal.map((el, idx) =>
-                            <input id='childItem' className='form-control mb-2' onChange={(event) => getValue(event, "input", idx)} />)
+                            <input
+                                key={idx}
+                                id='childItem'
+                                className='form-control mb-2'
+                                placeholder={"第" + (idx + 1) + "欄"}
+                                onChange={(event) => getValue(event, "input", idx)}
+                            />)
                     }
                 </div>
             </InputModal>
         </>
     );
-};
+}
 export default ToolHead;

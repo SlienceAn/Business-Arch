@@ -19,8 +19,12 @@ const InputModal = ({ postData, children }) => {
                             {children}
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-                            <button type="button" className="btn btn-primary" onClick={postData}>確認</button>
+                            <button
+                                type="button"
+                                className="btn btn-primary"
+                                data-bs-dismiss="modal"
+                                onClick={postData}>確認
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -28,5 +32,4 @@ const InputModal = ({ postData, children }) => {
             element)
     }
 };
-
 export default InputModal;

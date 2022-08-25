@@ -3,7 +3,6 @@ import axios from 'axios';
 
 export const Context = createContext({})
 const arr = [];
-
 export const getAllBody = (body) => {
     Object.values(body).map(el => {
         if (Array.isArray(el)) {
@@ -12,6 +11,7 @@ export const getAllBody = (body) => {
             arr.push(el)
         }
     })
+     
     return arr;
 }
 
@@ -23,6 +23,6 @@ export const useAxios = (config) => {
     })
         .then(result => res = result)
         .catch(err => error = err)
-
     return { res, error }
 }
+

@@ -28,5 +28,5 @@ const TreeView = (props) => {
         )
     }
 }
-export default TreeView;
+export default React.memo(TreeView);
 

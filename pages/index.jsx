@@ -9,13 +9,13 @@ export default function App() {
     content: []
   })
   return (
-    <Context.Provider value={[context, setContext]}>
-      <ToolHead parentTitle={getAllBody(context)} />
-      <div className='TreePanel'>
-        <ul>
-          <TreeView data={context} />
-        </ul>
-      </div>
-    </Context.Provider>
+      <Context.Provider value={[context, setContext]}>
+        <ToolHead parentTitle={getAllBody(context)} />
+        <div className='TreePanel'>
+          <ul>
+            <TreeView data={context} />
+          </ul>
+        </div>
+      </Context.Provider>
   )
 }

@@ -4,6 +4,8 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: #212c3b;
+  color: #fff;
 }
 
 a {
@@ -13,4 +15,11 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.btn-bg {
+  background: #212c3b;
+}
+.btn-bg:hover{
+   background:#7ebcb9;
 }

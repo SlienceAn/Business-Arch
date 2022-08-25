@@ -3,6 +3,7 @@ import InputModal from './InputModal';
 import { Context } from '../public/lib';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import ToolButton from './ToolButton';
+
 const testArr = {
     body: "1",
     content: [
@@ -11,13 +12,27 @@ const testArr = {
             content: [
                 {
                     body: "1-1-A",
-                    content: []
+                    content: [
+                        {
+                            body: "1-1-A-a",
+                            content: []
+                        }
+                    ]
                 }
             ]
         },
         {
             body: "1-2",
-            content: []
+            content: [
+                {
+                    body: "1-2-A",
+                    content: []
+                },
+                {
+                    body: "1-2-B",
+                    content: []
+                }
+            ]
         },
         {
             body: "1-3",
@@ -25,6 +40,7 @@ const testArr = {
         }
     ]
 }
+
 const ToolHead = ({ parentTitle }) => {
     const [childVal, setChildVal] = useState([{
         body: "",
@@ -44,16 +60,19 @@ const ToolHead = ({ parentTitle }) => {
     }
     const postData = () => {
         setContext({ ...context, content: childVal })
-        findDeepObject(testArr, "1-1-A")
+        findDeepObject(testArr, "1-2-B")
     }
     const findDeepObject = (dataObj, val) => {
-        if (dataObj['body'] === val) {
-            return
-        } else {
-            for (let i = 0; i < dataObj['content'].length; i++) {
-                findDeepObject(dataObj['content'][i])
+        let arr = [];
+        for (let k in dataObj['content']) {
+            if (dataObj['content'][k]['body'] === val) {
+                console.log("存在")
+                console.log(k)
+            } else {
+                findDeepObject(dataObj['content'][k], val)
             }
         }
+        console.log(arr)
     }
     return (
         <>

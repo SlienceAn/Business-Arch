@@ -3,9 +3,8 @@ import InputModal from './InputModal';
 import { Context } from '../public/lib';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import ToolButton from './ToolButton';
-
 const testArr = {
-    body: "1",
+    body: "社會",
     content: [
         {
             body: "1-1",
@@ -59,20 +58,22 @@ const ToolHead = ({ parentTitle }) => {
         }
     }
     const postData = () => {
-        setContext({ ...context, content: childVal })
-        findDeepObject(testArr, "1-2-B")
+        // setContext({ ...context, content: childVal })
+        findDeepObject(testArr, "1-2")
+        console.log(testArr)
+        setContext(testArr)
     }
+
     const findDeepObject = (dataObj, val) => {
-        let arr = [];
-        for (let k in dataObj['content']) {
-            if (dataObj['content'][k]['body'] === val) {
-                console.log("存在")
-                console.log(k)
+        for (let i in dataObj['content']) {
+            if (dataObj['content'][i]['body'] === val) {
+                let { content } = dataObj['content'][i]
+                content.push({ body: "賽林涼", content: [] })
+                content.push({ body: "幹你娘", content: [] })
             } else {
-                findDeepObject(dataObj['content'][k], val)
+                findDeepObject(dataObj['content'][i], val)
             }
         }
-        console.log(arr)
     }
     return (
         <>

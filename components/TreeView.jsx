@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router'
+import React, { useState, useEffect } from 'react';
 import { AiFillFolderOpen, AiFillFolder } from 'react-icons/ai';
 
-const TreeView = (props) => {
+const TreeView =React.memo((props) => {
     const { data } = props
-    const [isShow, setShow] = useState(true)
-    const router = useRouter()
+    const [isShow, setShow] = useState(false)
     if (data['content'] && data.content.length !== 0) {
         return (
             <li className={data.body === "社會" ? "root" : ""}>
@@ -27,6 +25,6 @@ const TreeView = (props) => {
             </li>
         )
     }
-}
-export default React.memo(TreeView);
+})
+export default TreeView;
 

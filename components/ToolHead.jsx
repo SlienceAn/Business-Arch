@@ -1,52 +1,30 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import InputModal from './InputModal';
-import { Context } from '../public/lib';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import ToolButton from './ToolButton';
-const testArr = {
-    body: "社會",
-    content: [
-        {
-            body: "1-1",
-            content: [
-                {
-                    body: "1-1-A",
-                    content: [
-                        {
-                            body: "1-1-A-a",
-                            content: []
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            body: "1-2",
-            content: [
-                {
-                    body: "1-2-A",
-                    content: []
-                },
-                {
-                    body: "1-2-B",
-                    content: []
-                }
-            ]
-        },
-        {
-            body: "1-3",
-            content: []
-        }
-    ]
-}
 
-const ToolHead = ({ parentTitle }) => {
-    const [childVal, setChildVal] = useState([{
-        body: "",
+const testArr =
+{
+    body: "社會",
+    content: []
+}
+const arr = [
+    {
+        body: "React",
         content: []
-    }])
+    },
+    {
+        body: "Vue",
+        content: []
+    },
+    {
+        body: "Angular",
+        content: []
+    }
+]
+const ToolHead = ({ parentTitle, setContext }) => {
+    const [childVal, setChildVal] = useState([])
     const [parentVal, setParentVal] = useState("")
-    const [context, setContext] = useContext(Context)
     const getValue = (event, cate, idx = 0) => {
         if (cate === "select") {
             setParentVal(event.target.value)
@@ -58,21 +36,24 @@ const ToolHead = ({ parentTitle }) => {
         }
     }
     const postData = () => {
-        // setContext({ ...context, content: childVal })
-        findDeepObject(testArr, "1-2")
-        console.log(testArr)
+        findDeepObject(testArr, parentVal)
+        console.log("Data", testArr)
         setContext(testArr)
     }
 
     const findDeepObject = (dataObj, val) => {
-        for (let i in dataObj['content']) {
-            if (dataObj['content'][i]['body'] === val) {
-                let { content } = dataObj['content'][i]
-                content.push({ body: "賽林涼", content: [] })
-                content.push({ body: "幹你娘", content: [] })
-            } else {
-                findDeepObject(dataObj['content'][i], val)
+        if (dataObj['body'] === val) {
+            for (let i = 0; i < childVal.length; i++) {
+                dataObj['content'].push({
+                    body: childVal[i]['body'],
+                    content: childVal[i]['content']
+                })
             }
+            return
+        } else {
+            dataObj['content'].map(el => {
+                findDeepObject(el, val)
+            })
         }
     }
     return (
@@ -103,7 +84,7 @@ const ToolHead = ({ parentTitle }) => {
             </div>
             <InputModal postData={postData}>
                 <div className='mb-3'>
-                    <label className='form-label' htmlFor='parentItem'>選擇父項</label>
+                    <label className='form-label' htmlFor='parentItem'>選擇添加子項目標題</label>
                     <select id='parentItem' className='form-control' onChange={(event) => getValue(event, "select")}>
                         <option>請下拉選擇項目</option>
                         {[...new Set(parentTitle)].map((el, idx) => <option key={el + idx}>{el}</option>)}
@@ -135,4 +116,4 @@ const ToolHead = ({ parentTitle }) => {
         </>
     );
 }
-export default React.memo(ToolHead);
+export default ToolHead;

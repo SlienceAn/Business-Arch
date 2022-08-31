@@ -1,7 +1,5 @@
-import { createContext } from "react";
 import axios from 'axios';
 
-export const Context = createContext({})
 const arr = [];
 export const getAllBody = (body) => {
     Object.values(body).map(el => {

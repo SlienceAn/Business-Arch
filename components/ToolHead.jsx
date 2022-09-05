@@ -21,6 +21,9 @@ const ToolHead = ({ parentTitle, setContext, context }) => {
         arr.pop()
         setChildVal(arr)
     }
+    const saveFile = () => {
+        console.log(context)
+    }
     const postData = () => {
         const newContext = Object.assign({}, context)
         findDeepObject(newContext, parentVal)
@@ -49,6 +52,7 @@ const ToolHead = ({ parentTitle, setContext, context }) => {
                         btnStyle="primary"
                         icon="file-earmark-fill"
                         text="存檔"
+                        onClick={saveFile}
                     />
                     <ToolButton
                         btnStyle="primary"

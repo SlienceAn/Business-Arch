@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import InputModal from './InputModal';
-import { BsPlusCircleFill } from 'react-icons/bs';
+import { BsPlusCircleFill, BsDashCircleFill } from 'react-icons/bs';
 import ToolButton from './ToolButton';
-
 
 const ToolHead = ({ parentTitle, setContext, context }) => {
     const [childVal, setChildVal] = useState([])
@@ -17,6 +16,11 @@ const ToolHead = ({ parentTitle, setContext, context }) => {
             setChildVal(arr)
         }
     }
+    const removeCol = () => {
+        const arr = [...childVal]
+        arr.pop()
+        setChildVal(arr)
+    }
     const postData = () => {
         const newContext = Object.assign({}, context)
         findDeepObject(newContext, parentVal)
@@ -24,7 +28,9 @@ const ToolHead = ({ parentTitle, setContext, context }) => {
     }
     const findDeepObject = (dataObj, val) => {
         if (dataObj.body === val) {
-            dataObj.content = childVal
+            for (let i = 0; i < childVal.length; i++) {
+                dataObj.content.push(childVal[i])
+            }
             setChildVal([])
         }
         for (const i of dataObj.content) {
@@ -66,17 +72,27 @@ const ToolHead = ({ parentTitle, setContext, context }) => {
                     </select>
                 </div>
                 <div className='mb-3'>
-                    <label
-                        className='form-label d-flex align-content-end gap-2'
-                        htmlFor='childItem'
-                        onClick={() => setChildVal([...childVal, {
-                            body: "",
-                            content: []
-                        }])}
-                    >
-                        <span>添加子項</span>
-                        <BsPlusCircleFill fontSize="1.5rem" />
-                    </label>
+                    <div className='d-flex gap-3'>
+                        <label
+                            className='form-label d-flex align-content-end gap-2'
+                            htmlFor='childItem'
+                            onClick={() => setChildVal([...childVal, {
+                                body: "",
+                                content: []
+                            }])}
+                        >
+                            <span>添加子項</span>
+                            <BsPlusCircleFill fontSize="1.5rem" />
+                        </label>
+                        <label
+                            className='form-label d-flex align-content-end gap-2'
+                            htmlFor='childItem'
+                            onClick={removeCol}
+                        >
+                            <span>刪除子項</span>
+                            <BsDashCircleFill fontSize="1.5rem" />
+                        </label>
+                    </div>
                     {childVal.map((el, idx) =>
                         <input
                             key={idx}

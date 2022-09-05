@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AiFillFolderOpen, AiFillFolder } from 'react-icons/ai';
 
-const TreeView =React.memo((props) => {
+const TreeView = (props) => {
     const { data } = props
     const [isShow, setShow] = useState(false)
     if (data['content'] && data.content.length !== 0) {
@@ -25,6 +25,6 @@ const TreeView =React.memo((props) => {
             </li>
         )
     }
-})
+}
 export default TreeView;
 

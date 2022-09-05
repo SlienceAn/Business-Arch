@@ -3,26 +3,8 @@ import InputModal from './InputModal';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import ToolButton from './ToolButton';
 
-const testArr =
-{
-    body: "社會",
-    content: []
-}
-const arr = [
-    {
-        body: "React",
-        content: []
-    },
-    {
-        body: "Vue",
-        content: []
-    },
-    {
-        body: "Angular",
-        content: []
-    }
-]
-const ToolHead = ({ parentTitle, setContext }) => {
+
+const ToolHead = ({ parentTitle, setContext, context }) => {
     const [childVal, setChildVal] = useState([])
     const [parentVal, setParentVal] = useState("")
     const getValue = (event, cate, idx = 0) => {
@@ -36,24 +18,17 @@ const ToolHead = ({ parentTitle, setContext }) => {
         }
     }
     const postData = () => {
-        findDeepObject(testArr, parentVal)
-        console.log("Data", testArr)
-        setContext(testArr)
+        const newContext = Object.assign({}, context)
+        findDeepObject(newContext, parentVal)
+        setContext(newContext)
     }
-
     const findDeepObject = (dataObj, val) => {
-        if (dataObj['body'] === val) {
-            for (let i = 0; i < childVal.length; i++) {
-                dataObj['content'].push({
-                    body: childVal[i]['body'],
-                    content: childVal[i]['content']
-                })
-            }
-            return
-        } else {
-            dataObj['content'].map(el => {
-                findDeepObject(el, val)
-            })
+        if (dataObj.body === val) {
+            dataObj.content = childVal
+            setChildVal([])
+        }
+        for (const i of dataObj.content) {
+            findDeepObject(i, val)
         }
     }
     return (

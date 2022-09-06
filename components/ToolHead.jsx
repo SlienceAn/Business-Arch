@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import InputModal from './InputModal';
 import { BsPlusCircleFill, BsDashCircleFill } from 'react-icons/bs';
+import InputModal from './InputModal';
 import ToolButton from './ToolButton';
+import axios from 'axios'
 
 const ToolHead = ({ parentTitle, setContext, context }) => {
     const [childVal, setChildVal] = useState([])
@@ -21,15 +22,22 @@ const ToolHead = ({ parentTitle, setContext, context }) => {
         arr.pop()
         setChildVal(arr)
     }
+
     const saveFile = () => {
-        console.log(context)
+        axios({
+            method: "POST",
+            url: "/api/DataPool",
+            data: context
+        })
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
     }
     const postData = () => {
         const newContext = Object.assign({}, context)
-        findDeepObject(newContext, parentVal)
+        addDeepObject(newContext, parentVal)
         setContext(newContext)
     }
-    const findDeepObject = (dataObj, val) => {
+    const addDeepObject = (dataObj, val) => {
         if (dataObj.body === val) {
             for (let i = 0; i < childVal.length; i++) {
                 dataObj.content.push(childVal[i])
@@ -37,7 +45,7 @@ const ToolHead = ({ parentTitle, setContext, context }) => {
             setChildVal([])
         }
         for (const i of dataObj.content) {
-            findDeepObject(i, val)
+            addDeepObject(i, val)
         }
     }
     return (
@@ -46,23 +54,13 @@ const ToolHead = ({ parentTitle, setContext, context }) => {
                 <div className='d-flex gap-4'>
                     <button className='btn btn-bg text-white d-flex gap-2' data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <i className="bi bi-pencil" />
-                        <span>添加</span>
+                        <span>添加架構</span>
                     </button>
                     <ToolButton
                         btnStyle="primary"
                         icon="file-earmark-fill"
-                        text="存檔"
+                        text="選擇存檔紀錄"
                         onClick={saveFile}
-                    />
-                    <ToolButton
-                        btnStyle="primary"
-                        icon="images"
-                        text="匯出圖片"
-                    />
-                    <ToolButton
-                        btnStyle="danger"
-                        icon="trash"
-                        text="刪除"
                     />
                 </div>
                 <input placeholder='search' />

@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document'
+import Link from 'next/link'
 
 export default function Document() {
     return (
@@ -9,6 +10,14 @@ export default function Document() {
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
             </Head>
             <body>
+                <nav className="w-100 py-3 px-4 d-flex justify-content-between" style={{ background: '#141b25' }}>
+                    <Link href="/NewPage">
+                        <a>新增紀錄</a>
+                    </Link>
+                    <Link href="/">
+                        <a>存檔紀錄</a>
+                    </Link>
+                </nav>
                 <Main />
                 <NextScript />
                 <div id='modal'></div>

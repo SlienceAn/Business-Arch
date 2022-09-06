@@ -23,4 +23,3 @@ export const useAxios = (config) => {
         .catch(err => error = err)
     return { res, error }
 }
-

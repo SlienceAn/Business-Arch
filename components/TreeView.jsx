@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { AiFillFolderOpen, AiFillFolder } from 'react-icons/ai';
 
-//css root...bug
 const TreeView = (props) => {
     const { data } = props
     const [isShow, setShow] = useState(false)
@@ -19,7 +18,7 @@ const TreeView = (props) => {
         )
     } else {
         return (
-            <li>
+            <li className={data.body === '社會局' ? 'root' : ''}>
                 <span>
                     {data.body}
                 </span>

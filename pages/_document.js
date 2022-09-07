@@ -1,6 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 import Link from 'next/link'
-import { BsFillBrushFill,BsChatDotsFill } from 'react-icons/bs'
+import { BsFillBrushFill, BsChatDotsFill } from 'react-icons/bs'
 
 export default function Document() {
     return (
@@ -14,19 +14,20 @@ export default function Document() {
                 <nav className="w-100 py-3 px-4 d-flex gap-4 justify-content-end" style={{ background: '#141b25' }}>
                     <Link href="/NewPage">
                         <a className='text-white d-flex gap-2 align-items-center'>
-                            <BsFillBrushFill/>
+                            <BsFillBrushFill />
                             <span>新增紀錄</span>
                         </a>
                     </Link>
                     <Link href="/FileRecord">
                         <a className='text-white d-flex gap-2 align-items-center'>
-                            <BsChatDotsFill/>
+                            <BsChatDotsFill />
                             <span>存檔紀錄</span>
                         </a>
                     </Link>
                 </nav>
                 <Main />
                 <NextScript />
+                <div id='modal' />
             </body>
         </Html>
     )

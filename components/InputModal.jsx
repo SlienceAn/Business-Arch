@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-const InputModal = ({ postData, children }) => {
+const InputModal = ({ title, children,click }) => {
     const [element, setElement] = useState(null)
     useEffect(() => {
         typeof document !== undefined ? setElement(document.getElementById("modal")) : setEle(null)
@@ -12,7 +12,7 @@ const InputModal = ({ postData, children }) => {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">添加項目</h5>
+                            <h5 className="modal-title" id="exampleModalLabel">{title}</h5>
                             <button type="button" className="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
@@ -23,7 +23,8 @@ const InputModal = ({ postData, children }) => {
                                 type="button"
                                 className="btn btn-primary"
                                 data-bs-dismiss="modal"
-                                onClick={postData}>確認
+                                onClick={click}
+                            >確認
                             </button>
                         </div>
                     </div>

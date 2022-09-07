@@ -14,6 +14,7 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.1.3",
     "bootstrap-icons": "^1.9.1",
+    "dayjs": "^1.11.5",
     "mammoth": "^1.4.21",
     "next": "12.1.6",
     "popper.js": "^1.16.1",

@@ -9,7 +9,6 @@ export const getAllBody = (body) => {
             arr.push(el)
         }
     })
-     
     return arr;
 }
 

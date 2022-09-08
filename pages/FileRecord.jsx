@@ -32,7 +32,7 @@ const FileRecord = () => {
     return (
         <div className='d-flex gap-2'>
             <div className='w-25 p-2 h-100' style={{ background: "rgba(220 220 220);)" }}>
-                {res.map(ctx => <Card name={ctx} date="2022/01/01" click={() => selectData(ctx)} />)}
+                {res.map(ctx => <Card key={ctx} name={ctx} date="2022/01/01" click={() => selectData(ctx)} />)}
             </div>
             <div className='w-75'>
                 <div className='TreePanel'>

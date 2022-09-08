@@ -29,6 +29,7 @@ export default function getData(req, res) {
             message: err
           })
         } else {
+          console.log(process.cwd() + `/data_pool/${req.query.id}`)
           res.status(200).json({
             success:true,
             message:"讀取成功",

@@ -35,11 +35,12 @@ const FileRecord = () => {
                 {res.length === 0 ? <div>讀取中</div> : res.map(ctx => <Card key={ctx} name={ctx} date="2022/01/01" click={() => selectData(ctx)} />)}
             </div>
             <div className='w-75'>
-                <div className='TreePanel'>
-                    <ul>
-                        <TreeView data={currentFile} />
-                    </ul>
-                </div>
+                {Object.keys(currentFile).length === 0 ? <div className='text-white'>No Data</div> :
+                    <div className='TreePanel'>
+                        <ul>
+                            <TreeView data={currentFile} />
+                        </ul>
+                    </div>}
             </div>
         </div>
     );

@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BsInfoCircleFill } from 'react-icons/bs'
-import demo2 from '../data_pool/demo-2.json'
-import demo1 from '../data_pool/demo-1.json'
 import TreeView from '../components/TreeView';
 
 const FileRecord = () => {
     const [res, setRes] = useState([])
     const [currentFile, setCF] = useState({})
-    const fetchDate = () => {
+    const fetchData = () => {
         axios({
             method: "GET",
             url: "/api/DataPool",
@@ -20,17 +18,21 @@ const FileRecord = () => {
             })
             .catch(err => console.log(err))
     }
-    const selectDate = () => {
-
+    const selectData = (file) => {
+        axios({
+            method: "GET",
+            url: "/api/DataPool?id=" + file
+        })
+            .then(res => setCF(res.data.payload))
+            .catch(err => console.log(err))
     }
     useEffect(() => {
-        fetchDate()
+        fetchData()
     }, [])
     return (
         <div className='d-flex gap-2'>
             <div className='w-25 p-2 h-100' style={{ background: "rgba(220 220 220);)" }}>
-                <Card name="demo-1" click={() => setCF(demo1)} />
-                <Card name="demo-2" click={() => setCF(demo2)} />
+                {res.map(ctx => <Card name={ctx} date="2022/01/01" click={() => selectData(ctx)} />)}
             </div>
             <div className='w-75'>
                 <div className='TreePanel'>
@@ -60,12 +62,20 @@ const Card = ({ name, date, click }) => {
                 display:flex;
                 justify-content:center;
                 align-items:center;
+                position:relative;
               }
               .card-side::hover{
                 cursor:pointer;
               }
               .card-side::before{
-
+                position: absolute;
+                content: "";
+                left:91px;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 20px 0 20px 25px;
+                border-color: transparent transparent transparent #01897d;
               }
             `}</style>
         </div>

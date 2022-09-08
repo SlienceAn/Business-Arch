@@ -1,5 +1,6 @@
 import fs from 'fs'
 import dayjs from 'dayjs'
+import path from 'path'
 
 export default function getData(req, res) {
   if (req.method === "GET") {
@@ -29,7 +30,8 @@ export default function getData(req, res) {
             message: err
           })
         } else {
-          console.log(process.cwd() + `/data_pool/${req.query.id}`)
+          console.log("Post File",process.cwd() + `/data_pool/${req.query.id}`)
+          console.log(path.resolve())
           res.status(200).json({
             success:true,
             message:"讀取成功",

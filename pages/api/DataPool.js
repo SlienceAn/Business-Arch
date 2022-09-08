@@ -25,17 +25,18 @@ export default function getData(req, res) {
     } else {
       fs.readFile(process.cwd() + `/data_pool/${req.query.id}`, (err, data) => {
         if (err) {
+          console.log("Post File", process.cwd() + `/data_pool/${req.query.id}`)
+          console.log(path.resolve())
           res.status(404).json({
             success: false,
             message: err
           })
         } else {
-          console.log("Post File",process.cwd() + `/data_pool/${req.query.id}`)
-          console.log(path.resolve())
+
           res.status(200).json({
-            success:true,
-            message:"讀取成功",
-            payload:JSON.parse(data.toString())
+            success: true,
+            message: "讀取成功",
+            payload: JSON.parse(data.toString())
           })
         }
       })

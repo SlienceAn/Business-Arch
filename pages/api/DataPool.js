@@ -1,11 +1,14 @@
 import fs, { readdir } from 'fs'
 import dayjs from 'dayjs'
 import { promisify } from 'util'
+import path from 'path'
 const readfileAsync = promisify(fs.readFile);
 const readdirAsync = promisify(fs.readdir);
 
 export default function getData(req, res) {
   if (req.method === "GET") {
+    console.log(process.cwd())
+    console.log(path.resolve())
     try {
       if (req.query.id === undefined) {
         let files = []

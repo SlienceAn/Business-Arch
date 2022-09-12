@@ -7,7 +7,7 @@ const readdirAsync = promisify(fs.readdir);
 
 export default function getData(req, res) {
   if (req.method === "GET") {
-    console.log()
+    console.log(process.cwd())
     try {
       if (req.query.id === undefined) {
         let files = []
@@ -39,7 +39,7 @@ export default function getData(req, res) {
           })
       }
       else {
-        readfileAsync(process.cwd() + `/public/data_pool/${req.query.id}.json`)
+        readfileAsync(process.cwd() + `/data_pool/${req.query.id}.json`)
           .then(data => {
             res.status(200).json({
               success: true,
@@ -65,7 +65,7 @@ export default function getData(req, res) {
       context['fileName'] = req.body.fileName
       context['dateTime'] = dayjs().format('YYYY/MM/DD HH:mm:ss')
       const jsonContent = JSON.stringify(context)
-      fs.writeFile(process.cwd() + `/public/data_pool/${req.body.fileName}.json`, jsonContent, 'utf-8', (err) => {
+      fs.writeFile(process.cwd() + `/data_pool/${req.body.fileName}.json`, jsonContent, 'utf-8', (err) => {
         if (err) {
           res.status(404).json({
             success: false,

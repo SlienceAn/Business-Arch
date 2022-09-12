@@ -47,8 +47,9 @@ const FileRecord = () => {
             </div>
             <div className='w-75'>
                 <h4 className='text-white'>{active}</h4>
-                {Object.keys(currentFile).length === 0 ? <div className='text-white'>No Data</div> :
-                    <div className='TreePanel' style={{fontWeight:'bolder'}}>
+                {Object.keys(currentFile).length === 0 ?
+                    <div className='text-white'>No Data</div> :
+                    <div className='TreePanel' style={{ fontWeight: 'bolder' }}>
                         <ul>
                             <TreeView data={currentFile} />
                         </ul>

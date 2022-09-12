@@ -1,6 +1,7 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 import Link from 'next/link'
 import { BsFillBrushFill, BsChatDotsFill } from 'react-icons/bs'
+import { GiWhaleTail } from 'react-icons/gi'
 
 export default function Document() {
     return (
@@ -11,19 +12,22 @@ export default function Document() {
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
             </Head>
             <body>
-                <nav className="w-100 py-3 px-4 d-flex gap-4 justify-content-end" style={{ background: '#141b25' }}>
-                    <Link href="/NewPage">
-                        <a className='text-white d-flex gap-2 align-items-center'>
-                            <BsFillBrushFill />
-                            <span>新增紀錄</span>
-                        </a>
-                    </Link>
-                    <Link href="/FileRecord">
-                        <a className='text-white d-flex gap-2 align-items-center'>
-                            <BsChatDotsFill />
-                            <span>存檔紀錄</span>
-                        </a>
-                    </Link>
+                <nav className="w-100 text-white py-3 px-4 d-flex justify-content-between" style={{ background: '#141b25' }}>
+                    <GiWhaleTail fontSize="2rem" />
+                    <div className='d-flex gap-4'>
+                        <Link href="/NewPage">
+                            <a className='d-flex gap-2 align-items-center'>
+                                <BsFillBrushFill />
+                                <span>新增紀錄</span>
+                            </a>
+                        </Link>
+                        <Link href="/FileRecord">
+                            <a className='d-flex gap-2 align-items-center'>
+                                <BsChatDotsFill />
+                                <span>存檔紀錄</span>
+                            </a>
+                        </Link>
+                    </div>
                 </nav>
                 <Main />
                 <NextScript />

@@ -7,13 +7,14 @@ const readdirAsync = promisify(fs.readdir);
 
 export default function getData(req, res) {
   if (req.method === "GET") {
+    console.log()
     try {
       if (req.query.id === undefined) {
         let files = []
-        readdirAsync(process.cwd() + '/public/data_pool')
+        readdirAsync(process.cwd() + '/data_pool')
           .then(file => {
             for (const i in file) {
-              files.push(readfileAsync(process.cwd() + `/public/data_pool/${file[i]}`))
+              files.push(readfileAsync(process.cwd() + `/data_pool/${file[i]}`))
             }
             Promise.all(files).then(response => {
               let payload = []
@@ -33,8 +34,6 @@ export default function getData(req, res) {
           .catch(err => {
             res.status(404).json({
               success: false,
-              s: process.cwd(),
-              a: path.resolve(),
               message: err
             })
           })

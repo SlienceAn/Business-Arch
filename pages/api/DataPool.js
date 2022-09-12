@@ -7,8 +7,6 @@ const readdirAsync = promisify(fs.readdir);
 
 export default function getData(req, res) {
   if (req.method === "GET") {
-    console.log(process.cwd())
-    console.log(path.resolve())
     try {
       if (req.query.id === undefined) {
         let files = []
@@ -35,6 +33,8 @@ export default function getData(req, res) {
           .catch(err => {
             res.status(404).json({
               success: false,
+              s: process.cwd(),
+              a: path.resolve(),
               message: err
             })
           })

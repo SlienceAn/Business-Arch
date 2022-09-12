@@ -11,10 +11,10 @@ export default function getData(req, res) {
     try {
       if (req.query.id === undefined) {
         let files = []
-        readdirAsync('../../../../data_pool')
+        readdirAsync('https://business-arch-bbb7m9psm-silencean.vercel.app/data_pool')
           .then(file => {
             for (const i in file) {
-              files.push(readfileAsync(`../../../../data_pool/${file[i]}`))
+              files.push(readfileAsync(`https://business-arch-bbb7m9psm-silencean.vercel.app/data_pool/${file[i]}`))
             }
             Promise.all(files).then(response => {
               let payload = []

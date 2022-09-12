@@ -11,10 +11,10 @@ export default function getData(req, res) {
     try {
       if (req.query.id === undefined) {
         let files = []
-        readdirAsync(process.cwd() + '/data_pool')
+        readdirAsync('../data_pool')
           .then(file => {
             for (const i in file) {
-              files.push(readfileAsync(process.cwd() + `/data_pool/${file[i]}`))
+              files.push(readfileAsync(`../data_pool/${file[i]}`))
             }
             Promise.all(files).then(response => {
               let payload = []

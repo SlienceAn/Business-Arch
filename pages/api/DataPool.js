@@ -28,7 +28,7 @@ export default function getData(req, res) {
             res.status(200).json({
               success: true,
               message: "查詢成功",
-              payload: files
+              payload: payload
             })
           }
         })

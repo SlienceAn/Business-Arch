@@ -10,10 +10,10 @@ export default function getData(req, res) {
     try {
       if (req.query.id === undefined) {
         let files = []
-        readdirAsync(process.cwd() + '/public/data_pool')
+        readdirAsync('data_pool')
           .then(file => {
             for (const i in file) {
-              files.push(readfileAsync(process.cwd() + `/public/data_pool/${file[i]}`))
+              files.push(readfileAsync(`data_pool/${file[i]}`))
             }
             Promise.all(files).then(response => {
               let payload = []
@@ -43,7 +43,7 @@ export default function getData(req, res) {
           })
       }
       else {
-        readfileAsync(process.cwd() + `/public/data_pool/${req.query.id}.json`)
+        readfileAsync(`data_pool/${req.query.id}.json`)
           .then(data => {
             res.status(200).json({
               success: true,

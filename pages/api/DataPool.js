@@ -28,21 +28,22 @@ export default function getData(req, res) {
                 message: "查詢成功",
                 payload
               })
+            }).catch(err => {
+              res.status(404).json({
+                success: false,
+                message: err
+              })
             })
           })
           .catch(err => {
             res.status(404).json({
               success: false,
-              a: process.cwd(),
-              b: path.basename(),
-              c:path.resolve(__dirname),
-              d:path.resolve(__filename),
               message: err
             })
           })
       }
       else {
-        readfileAsync(process.cwd() + `/data_pool/${req.query.id}.json`)
+        readfileAsync(process.cwd() + `/public/data_pool/${req.query.id}.json`)
           .then(data => {
             res.status(200).json({
               success: true,

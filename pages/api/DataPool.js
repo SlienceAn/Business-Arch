@@ -11,10 +11,10 @@ export default function getData(req, res) {
     try {
       if (req.query.id === undefined) {
         let files = []
-        readdirAsync('https://business-arch-bbb7m9psm-silencean.vercel.app/data_pool')
+        readdirAsync(process.cwd() + '/public/data_pool')
           .then(file => {
             for (const i in file) {
-              files.push(readfileAsync(`https://business-arch-bbb7m9psm-silencean.vercel.app/data_pool/${file[i]}`))
+              files.push(readfileAsync(process.cwd() + `/public/data_pool/${file[i]}`))
             }
             Promise.all(files).then(response => {
               let payload = []
@@ -34,7 +34,7 @@ export default function getData(req, res) {
           .catch(err => {
             res.status(404).json({
               success: false,
-              a:process.cwd(),
+              a: process.cwd(),
               message: err
             })
           })

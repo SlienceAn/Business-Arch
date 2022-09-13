@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 import { BsInfoCircleFill } from 'react-icons/bs'
-import TreeView from '../components/TreeView';
+import TreeView from '../components/TreeView'
 
 const FileRecord = () => {
     const [res, setRes] = useState([])

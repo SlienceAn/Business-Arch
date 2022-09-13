@@ -1,19 +1,20 @@
 import fs from 'fs'
 import dayjs from 'dayjs'
 import { promisify } from 'util'
-import path from 'path';
+
 const readfileAsync = promisify(fs.readFile);
 const readdirAsync = promisify(fs.readdir);
 
 export default function getData(req, res) {
   if (req.method === "GET") {
     try {
+      //Get All
       if (req.query.id === undefined) {
         let files = []
-        readdirAsync('/data_pool')
+        readdirAsync(process.cwd() + '/public/data_pool')
           .then(file => {
             for (const i in file) {
-              files.push(readfileAsync(`/data_pool/${file[i]}`))
+              files.push(readfileAsync(process.cwd() + `/public/data_pool/${file[i]}`))
             }
             Promise.all(files).then(response => {
               let payload = []
@@ -31,19 +32,19 @@ export default function getData(req, res) {
             }).catch(err => {
               res.status(404).json({
                 success: false,
-                message: err
+                message: "Get All Data," + err
               })
             })
           })
           .catch(err => {
             res.status(404).json({
               success: false,
-              message: err
+              message: "Get All," + err
             })
           })
       }
       else {
-        readfileAsync(`/data_pool/${req.query.id}.json`)
+        readfileAsync(process.cwd() + `/public/data_pool/${req.query.id}.json`)
           .then(data => {
             res.status(200).json({
               success: true,
@@ -54,7 +55,7 @@ export default function getData(req, res) {
           .catch(err => {
             res.status(404).json({
               success: false,
-              message: err
+              message: "Read single," + err
             })
           })
       }

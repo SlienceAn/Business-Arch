@@ -41,56 +41,22 @@ export default function getData(req, res) {
             })
         }
       })
-
-      //-------------------------------------------------
-      // readdirAsync('https://business-arch.vercel.app/data_pool')
-      //   .then(file => {
-      //     for (const i in file) {
-      //       files.push(readfileAsync(`https://business-arch.vercel.app/data_pool/${file[i]}`))
-      //     }
-      //     Promise.all(files).then(response => {
-      //       let payload = []
-      //       for (const i in response) {
-      //         payload.push({
-      //           fileName: JSON.parse(response[i].toString())['fileName'],
-      //           dateTime: JSON.parse(response[i].toString())['dateTime']
-      //         })
-      //       }
-      //       res.status(200).json({
-      //         success: true,
-      //         message: "查詢成功",
-      //         payload
-      //       })
-      //     }).catch(err => {
-      //       res.status(404).json({
-      //         success: false,
-      //         message: "Get All Data," + err
-      //       })
-      //     })
-      //   })
-      //   .catch(err => {
-      //     res.status(404).json({
-      //       success: false,
-      //       message: "Get All," + err
-      //     })
-      //   })
+    } else {
+      fs.readFile(process.cwd() + `/public/data_pool/${req.query.id}.json`, (err, data) => {
+        if (err) {
+          res.status(404).json({
+            success: false,
+            message: err
+          })
+        } else {
+          res.status(200).json({
+            success: true,
+            message: "讀取成功",
+            payload: JSON.parse(data.toString())
+          })
+        }
+      })
     }
-    // else {
-    // readfileAsync(`https://business-arch.vercel.app/data_pool/${req.query.id}.json`)
-    //   .then(data => {
-    //     res.status(200).json({
-    //       success: true,
-    //       message: "讀取成功",
-    //       payload: JSON.parse(data.toString())
-    //     })
-    //   })
-    //   .catch(err => {
-    //     res.status(404).json({
-    //       success: false,
-    //       message: "Read single," + err
-    //     })
-    //   })
-    // }
   }
   //Add new json
   if (req.method === "POST") {

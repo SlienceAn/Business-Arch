@@ -27,12 +27,18 @@ export default function getData(req, res) {
                 dateTime: JSON.parse(response[i].toString())['dateTime']
               })
             }
+            res.status(200).json({
+              success: true,
+              message: "查詢成功",
+              payload: payload
+            })
           })
-          res.status(200).json({
-            success: true,
-            message: "查詢成功",
-            payload: payload
-          })
+            .catch(err => {
+              res.status(500).json({
+                success: false,
+                message: err
+              })
+            })
         }
       })
 

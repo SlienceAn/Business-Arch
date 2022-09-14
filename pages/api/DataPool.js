@@ -58,30 +58,26 @@ export default function getData(req, res) {
       })
     }
   }
+
   //Add new json
   if (req.method === "POST") {
-    try {
-      const context = req.body.context;
-      context['fileName'] = req.body.fileName
-      context['dateTime'] = dayjs().format('YYYY/MM/DD HH:mm:ss')
-      const jsonContent = JSON.stringify(context)
-      fs.writeFile(process.cwd() + `/data_pool/${req.body.fileName}.json`, jsonContent, 'utf-8', (err) => {
-        if (err) {
-          res.status(404).json({
-            success: false,
-            message: err
-          })
-        } else {
-          res.status(200).json({
-            success: true,
-            message: "新增成功"
-          })
-        }
-      })
-    } catch (err) {
-      res.status(405);
-      res.end();
-    }
+    const context = req.body.context;
+    context['fileName'] = req.body.fileName
+    context['dateTime'] = dayjs().format('YYYY/MM/DD HH:mm:ss')
+    const jsonContent = JSON.stringify(context)
+    fs.writeFile(`../../../../data_pool/${req.body.fileName}.json`, jsonContent, 'utf-8', (err) => {
+      if (err) {
+        res.status(404).json({
+          success: false,
+          message: err
+        })
+      } else {
+        res.status(200).json({
+          success: true,
+          message: "新增成功"
+        })
+      }
+    })
   }
 }
 

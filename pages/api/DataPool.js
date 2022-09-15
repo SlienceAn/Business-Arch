@@ -67,7 +67,7 @@ export default function getData(req, res) {
     context['fileName'] = req.body.fileName
     context['dateTime'] = dayjs().format('YYYY/MM/DD HH:mm:ss')
     const jsonContent = JSON.stringify(context)
-    fs.appendFile(`../../../data_pool/${req.body.fileName}.json`, jsonContent, 'utf-8', (err) => {
+    fs.appendFile(path.resolve('./public', `data_pool/${req.body.fileName}.json`), jsonContent, 'utf-8', (err) => {
       if (err) {
         res.status(404).json({
           success: false,

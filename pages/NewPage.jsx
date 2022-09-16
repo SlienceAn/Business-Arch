@@ -53,12 +53,17 @@ const NewPage = () => {
                 fileName
             }
         })
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
+            .then(res => {
+                if (res.data.success) {
+
+                } else {
+
+                }
+            })
     }
     return (
         <>
-            <div className='d-flex px-4 py-2'>
+            <div className='d-flex px-4 py-2 gap-4'>
                 <div className='w-25 bg-white p-4'>
                     <div className='text-center mb-4 d-flex gap-2 justify-content-center'>
                         <i className="bi bi-pencil" />

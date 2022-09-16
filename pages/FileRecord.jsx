@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { BsInfoCircleFill } from 'react-icons/bs'
 import TreeView from '../components/TreeView'
+import ToolNav from '../components/ToolNav'
 
 const FileRecord = () => {
     const [res, setRes] = useState([])
@@ -32,7 +33,7 @@ const FileRecord = () => {
         fetchData()
     }, [])
     return (
-        <div className='d-flex gap-4'>
+        <div className='d-flex gap-5'>
             <div className='w-25 p-2 h-100' style={{ background: "rgba(220 220 220);)" }}>
                 {res.length === 0 ?
                     <div>讀取中</div> :
@@ -45,7 +46,8 @@ const FileRecord = () => {
                             click={() => selectData(ctx.fileName)}
                         />)}
             </div>
-            <div className='w-75'>
+            <div className='w-75 position-relative'>
+                <ToolNav />
                 <h4 className='text-white'>{active}</h4>
                 {Object.keys(currentFile).length === 0 ?
                     <div className='text-white'>No Data</div> :

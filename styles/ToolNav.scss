@@ -1,0 +1,136 @@
+$m: #21264B;
+$iconmargin: 25px;
+$barPos:25px;
+
+.base {
+    position: absolute;
+    background-color: #fff;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    border-bottom-left-radius: 100%;
+}
+
+.menu {
+    position: absolute;
+    z-index: 100;
+    background-color: #21264b;
+    width: 100px;
+    height: 100px;
+    top: 0;
+    right: 0;
+    border-bottom-left-radius: 100%;
+    cursor: pointer;
+}
+
+.icon {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-100%, -100%);
+
+    &::before,
+    &::after {
+        position: absolute;
+        height: 5px;
+        left: $barPos;
+        right: -$barPos;
+        border-radius: 5px;
+        background-color: $m;
+        content: '';
+        transform: rotate(0deg);
+        transition: top 0.5s ease 0.5s, transform 0.5s ease, background-color 0.75s ease 0.25s;
+    }
+
+    &::before {
+        top: 0;
+    }
+
+    &::after {
+        top: initial;
+        top: 20px;
+    }
+}
+
+.bar {
+    position: absolute;
+    height: 5px;
+    left: $barPos;
+    right: -$barPos;
+    border-radius: 5px;
+    background-color: $m;
+    transition: opacity 0s linear 0.5s, background-color 0.75s ease 0.25s;
+    opacity: 1;
+    top: 10px;
+}
+
+.icons {
+    position: absolute;
+    z-index: 98;
+    top: 0px;
+    left: 0px;
+
+    >* {
+        position: absolute;
+        font-size: 40px;
+        color: $m;
+    }
+
+    .a {
+        top: $iconmargin;
+        left: 200px;
+        transition-delay: 0.2s;
+    }
+
+    .b {
+        top: 141px;
+        left: 141px;
+        color: #fff;
+        transition-delay: 0.65s;
+    }
+
+    .c {
+        top: 200px;
+        left: $iconmargin;
+        transition-delay: 0.8s;
+    }
+}
+
+.section {
+    z-index: 96;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 0px;
+    width: 0px;
+    transform-origin: 100% 100%;
+    transform: rotate(135deg);
+}
+
+// .section-static {
+//     z-index: 94;
+//     width: 200px;
+//     height: 200px;
+//     position: absolute;
+//     top: 0px;
+//     left: 0px;
+//     transform-origin: 0% 0%;
+//     transition: width 1.25s cubic-bezier(0.50, 0, 0.05, 2), height 1.25s cubic-bezier(0.50, 0, 0.05, 2);
+
+//     &:hover {
+//         background-color: #EAEAEA;
+//     }
+
+//     &.top {
+//         transform: rotate(-135deg);
+//         border-bottom-left-radius: 100%;
+//     }
+
+//     &.bottom {
+//         transform: rotate(135deg);
+//         border-bottom-left-radius: 100%;
+//     }
+// }

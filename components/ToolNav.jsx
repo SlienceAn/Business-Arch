@@ -1,5 +1,6 @@
-import { BsFillAlarmFill, BsFillCloudDownloadFill, BsFillDiagram3Fill } from 'react-icons/bs'
-
+import { VscColorMode } from 'react-icons/vsc'
+import { BsArrowsFullscreen } from 'react-icons/bs'
+import { CgExport } from 'react-icons/cg'
 const ToolNav = () => {
     return (
         <div className="base">
@@ -8,13 +9,16 @@ const ToolNav = () => {
                     <div className="bar"></div>
                 </div>
             </div>
-            <div cclassName="icons">
-                <BsFillAlarmFill className='a' fontSize="2rem" />
-                <BsFillCloudDownloadFill className='b' fontSize="2rem" />
-                <BsFillDiagram3Fill className='c' fontSize="2rem" />
-                {/* <i className="fa fa-user" aria-hidden="true"></i>
-                <i className="fa fa-calendar-o" aria-hidden="true"></i>
-                <i className="fa fa-tachometer" aria-hidden="true"></i> */}
+            <div className="icons">
+                <div className='icons-top'>
+                    <VscColorMode fontSize="2rem" />
+                </div>
+                <div className='icons-middle'>
+                    <BsArrowsFullscreen fontSize="2rem" />
+                </div>
+                <div className='icons-bottom'>
+                    <CgExport fontSize="2rem" />
+                </div>
             </div>
             <div className="section">
                 <div className="cover1">

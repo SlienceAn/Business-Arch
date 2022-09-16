@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import { initializeApp } from "firebase/app";
-import { getFirestore, setDoc, addDoc, doc } from 'firebase/firestore/lite';
+import { getFirestore, setDoc, doc, getDoc, getDocs, collection as Collection } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQAOOh_pFVWQqVhaDKLKWFVRaGeMTSylM",
@@ -18,7 +18,30 @@ const collection = "information";
 
 export default async function getData(req, res) {
   if (req.method === "GET") {
-      //reset...
+    if (!req.query.id) {
+      let payload = [];
+      const getAllDoc = await getDocs(Collection(db, collection));
+      getAllDoc.forEach(ctx => {
+        payload.push({
+          fileName: ctx.data().fileName,
+          dateTime: ctx.data().dateTime
+        })
+      })
+      res.status(200).json({
+        success: true,
+        message: "查詢成功",
+        payload
+      })
+    } else {
+      const docData = await getDoc(doc(db, collection, req.query.id))
+      if (docData.exists()) {
+        res.status(200).json({
+          success: true,
+          message: "查詢成功",
+          payload: JSON.parse(docData.data().content)
+        })
+      }
+    }
   }
   if (req.method === "POST") {
     const context = req.body.context;

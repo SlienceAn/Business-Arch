@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import '../styles/globals.css'
 import '../styles/TreeView.scss'
 import '../styles/ToolNav.scss'
+import '../styles/index.scss'
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {

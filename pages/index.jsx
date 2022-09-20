@@ -1,8 +1,13 @@
 
 export default function App() {
   return (
-    <div className="text-white text-center">
-      <h1></h1>
+    <div className="w-100 h-100">
+      <div className="anime-content">
+          
+      </div>
+      <div className="text-content">
+         <span>Whale Fly</span>
+      </div>
     </div>
   )
 }

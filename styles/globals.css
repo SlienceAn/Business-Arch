@@ -2,11 +2,15 @@ html,
 body {
   padding: 0;
   margin: 0;
+  height: 100%;
+  overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background-color: #212c3b;
 }
-
+#__next {
+  height: 100%;
+}
 a {
   color: inherit;
   text-decoration: none;
@@ -19,6 +23,6 @@ a {
 .btn-bg {
   background: #212c3b;
 }
-.btn-bg:hover{
-   background:#7ebcb9;
+.btn-bg:hover {
+  background: #7ebcb9;
 }

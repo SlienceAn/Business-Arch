@@ -33,8 +33,8 @@ const FileRecord = () => {
         fetchData()
     }, [])
     return (
-        <div className='d-flex gap-5'>
-            <div className='w-25 p-2 h-100' style={{ background: "rgba(220 220 220);)" }}>
+        <div className='d-flex gap-5 h-100'>
+            <div className='p-2 h-100' style={{ background: "rgb(220 220 220)", width: "20%" }}>
                 {res.length === 0 ?
                     <div>讀取中</div> :
                     res.map(ctx =>
@@ -46,7 +46,7 @@ const FileRecord = () => {
                             click={() => selectData(ctx.fileName)}
                         />)}
             </div>
-            <div className='w-75 position-relative'>
+            <div className='position-relative' style={{ width: '80%' }}>
                 <ToolNav />
                 <h4 className='text-white'>{active}</h4>
                 {Object.keys(currentFile).length === 0 ?
@@ -65,7 +65,9 @@ const Card = ({ name, date, active, click }) => {
     return (
         <div className='card flex-row border-0 mb-2' onClick={click}>
             <div className='card-body w-75 p-2'>
-                <div><strong>{name}</strong></div>
+                <div>
+                    <strong>{name}</strong>
+                </div>
                 <span>{date}</span>
             </div>
             <div id={active === name ? "card-arrow" : ""} className='card-side w-25'>

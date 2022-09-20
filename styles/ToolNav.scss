@@ -10,6 +10,7 @@ $barPos:25px;
     width: 200px;
     height: 200px;
     border-bottom-left-radius: 100%;
+    overflow: hidden;
 }
 
 .menu {
@@ -73,23 +74,22 @@ $barPos:25px;
     top: 0px;
     left: 0px;
 
-    & > * {
+    &>* {
         position: absolute;
         font-size: 40px;
         color: $m;
     }
-
+     
     .icons-top {
         position: absolute;
         top: 0px;
         left: 40px;
-        transition-delay: 0.2s;
     }
 
     .icons-middle {
         position: absolute;
-        top: 70px;
-        left: 80px;
+        top: 75px;
+        left: 70px;
     }
 
     .icons-bottom {
@@ -98,39 +98,43 @@ $barPos:25px;
         left: 155px;
     }
 }
-
+//深色區塊
 .section {
     z-index: 96;
     position: absolute;
     top: 0px;
-    left: 0px;
+    left: 200px;
     height: 0px;
     width: 0px;
-    transform-origin: 100% 100%;
-    transform: rotate(135deg);
+    transform-origin: 0% 0%;
+    transform: rotate(-135deg);
+
+    .cover-outside {
+        transform-origin: 100% 100%;
+        &,
+        .cover-inside,
+        .cover-inside .content {
+           position: absolute;
+           width: 400px;
+           height: 400px;
+        }
+        &,    
+        .cover-inside {
+           top: 50%;
+           left: 50%;
+           transform: translate(-100%, -100%) rotate(16deg);
+           overflow: hidden;
+        }
+        .cover-inside {
+           transform: translate(50%, -50%) rotate(-32deg);
+           transform-origin: 0% 100%;
+           .content {
+              border-radius: 100%;
+              background-color: #01897d;
+              top: 100%;
+              left: 0%;
+              transform: translate(-50%, -50%);
+           }
+        }
+     }
 }
-
-// .section-static {
-//     z-index: 94;
-//     width: 200px;
-//     height: 200px;
-//     position: absolute;
-//     top: 0px;
-//     left: 0px;
-//     transform-origin: 0% 0%;
-//     transition: width 1.25s cubic-bezier(0.50, 0, 0.05, 2), height 1.25s cubic-bezier(0.50, 0, 0.05, 2);
-
-//     &:hover {
-//         background-color: #EAEAEA;
-//     }
-
-//     &.top {
-//         transform: rotate(-135deg);
-//         border-bottom-left-radius: 100%;
-//     }
-
-//     &.bottom {
-//         transform: rotate(135deg);
-//         border-bottom-left-radius: 100%;
-//     }
-// }

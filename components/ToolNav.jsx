@@ -14,21 +14,19 @@ const ToolNav = () => {
                     <VscColorMode fontSize="2rem" />
                 </div>
                 <div className='icons-middle'>
-                    <BsArrowsFullscreen fontSize="2rem" />
+                    <BsArrowsFullscreen fontSize="2rem" color='white'/>
                 </div>
                 <div className='icons-bottom'>
                     <CgExport fontSize="2rem" />
                 </div>
             </div>
             <div className="section">
-                <div className="cover1">
-                    <div className="cover2">
-                        <a className="content" href="#calender"></a>
+                <div className="cover-outside">
+                    <div className="cover-inside">
+                        <span className="content"></span>
                     </div>
                 </div>
             </div>
-            <a className="section-static top" href="#profile"></a>
-            <a className="section-static bottom" href="#dashboard"></a>
         </div>
     );
 };

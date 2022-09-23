@@ -1,6 +1,9 @@
 .animate-content {
     position: absolute;
-    background: #aaa;
+    // background-image: url('../public/index.jpg');
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    // background-position: center;
     top: 0;
     left: 0;
     width: 100%;
@@ -10,16 +13,31 @@
         height: 10%;
         background: #212c3b;
         animation: box;
-        animation-duration: .51s;
+        animation-duration: .5s;
         animation-fill-mode: forwards;
     }
 
-    @for $i from 1 to 10 {
+    @for $i from 1 to 11 {
         & div:nth-child(#{$i}) {
-            animation-delay:  #{$i*0.2}s;
+            animation-delay: #{$i*0.2}s;
         }
     }
+}
 
+.text-content {
+    width: 50%;
+    height: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    transform: scale(0);
+    border-radius: 25px;
+    backdrop-filter: blur(5px);
+    animation: text;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-delay: 2s;
 }
 
 @keyframes box {
@@ -29,5 +47,15 @@
 
     100% {
         width: 0%;
+    }
+}
+
+@keyframes text {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
     }
 }

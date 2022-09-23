@@ -1,18 +1,30 @@
-import React from 'react';
+import { useEffect } from 'react';
+import lance from '../public/demo.json'
 
-const selectGroup = () => {
+const SelectGroup = (props) => {
+    // let result = []
+    // const flatBody = (die) => {
+    //     die.map(el => {
+    //         if (el['content'].length === 0) {
+    //             return
+    //         } else {
+    //             flatBody(el['content'])
+    //         }
+    //     })
+    // }
+    useEffect(() => {
+        // flatBody(lance['content'])
+    }, [])
     return (
         <select>
-            <optgroup>
-                <option></option>
-                <option></option>
+            <optgroup label="">
+                <option>1</option>
             </optgroup>
-            <optgroup>
-                <option></option>
-                <option></option>
+            <optgroup label="">
+                <option>2</option>
             </optgroup>
         </select>
-    );
-};
+    )
+}
 
-export default selectGroup;
+export default SelectGroup;

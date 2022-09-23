@@ -13,6 +13,7 @@ const NewPage = () => {
     const [childVal, setChildVal] = useState([])
     const [parentVal, setParentVal] = useState("")
     const [fileName, setfileName] = useState("")
+
     const getValue = (event, cate, idx = 0) => {
         if (cate === "select") {
             setParentVal(event.target.value)
@@ -53,13 +54,6 @@ const NewPage = () => {
                 fileName
             }
         })
-            .then(res => {
-                if (res.data.success) {
-
-                } else {
-
-                }
-            })
     }
     return (
         <>
@@ -75,7 +69,7 @@ const NewPage = () => {
                                 <strong>選擇添加子項目標題</strong>
                             </label>
                             <select id='parentItem' className='form-control' onChange={(event) => getValue(event, "select")}>
-                                <option>請下拉選擇項目</option>
+                                <option style={{ fontWeight: "bolder", marginLeft: "50px" }}>請下拉選擇項目</option>
                                 {[...new Set(getAllBody(context))].map((el, idx) => <option key={el + idx}>{el}</option>)}
                             </select>
                         </div>

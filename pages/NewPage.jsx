@@ -3,11 +3,14 @@ import TreeView from '../components/TreeView'
 import { BsPlusCircleFill, BsDashCircleFill } from 'react-icons/bs';
 import { getAllBody } from '../public/lib'
 import InputModal from '../components/InputModal'
+import SelectGroup from '../components/SelectGroup';
 import axios from 'axios';
+import { useSerial } from '../public/lib';
 
 const NewPage = () => {
     const [context, setContext] = useState({
         body: "社會局",
+        id: "Head",
         content: []
     })
     const [childVal, setChildVal] = useState([])
@@ -20,7 +23,11 @@ const NewPage = () => {
         }
         if (cate === "input") {
             const arr = [...childVal]
-            arr[idx]['body'] = event.target.value;
+            arr[idx]['body'] = event.target.value
+            const serialID = useSerial(arr.length)
+            for (const i in arr) {
+                arr[i]['id'] = serialID[i]
+            }
             setChildVal(arr)
         }
     }
@@ -35,7 +42,7 @@ const NewPage = () => {
         setContext(newContext)
     }
     const addDeepObject = (dataObj, val) => {
-        if (dataObj.body === val) {
+        if (dataObj.id === val) {
             for (let i = 0; i < childVal.length; i++) {
                 dataObj.content.push(childVal[i])
             }
@@ -68,10 +75,7 @@ const NewPage = () => {
                             <label className='form-label' htmlFor='parentItem'>
                                 <strong>選擇添加子項目標題</strong>
                             </label>
-                            <select id='parentItem' className='form-control' onChange={(event) => getValue(event, "select")}>
-                                <option style={{ fontWeight: "bolder", marginLeft: "50px" }}>請下拉選擇項目</option>
-                                {[...new Set(getAllBody(context))].map((el, idx) => <option key={el + idx}>{el}</option>)}
-                            </select>
+                            <SelectGroup context={context} getValue={getValue} />
                         </div>
                         <div className='mb-3'>
                             <div className='d-flex gap-3'>

@@ -1,30 +1,29 @@
-import { useEffect } from 'react';
-import lance from '../public/demo.json'
 
-const SelectGroup = (props) => {
-    // let result = []
-    // const flatBody = (die) => {
-    //     die.map(el => {
-    //         if (el['content'].length === 0) {
-    //             return
-    //         } else {
-    //             flatBody(el['content'])
-    //         }
-    //     })
-    // }
-    useEffect(() => {
-        // flatBody(lance['content'])
-    }, [])
+const SelectGroup = ({ context, getValue }) => {
+    let result = []
+    const getAllData = (data) => {
+        Object.values(data).map(el => {
+            if (Array.isArray(el)) {
+                el.map(ctx => getAllData(ctx))
+            } else {
+                result.push({
+                    body: data['body'],
+                    id: data['id']
+                })
+            }
+        })
+        //set去除重複
+        return [...new Set(result.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
+    }
     return (
-        <select>
-            <optgroup label="">
-                <option>1</option>
-            </optgroup>
-            <optgroup label="">
-                <option>2</option>
-            </optgroup>
+        <select
+            id='parentItem'
+            className='form-control'
+            onChange={(event) => getValue(event, "select")}
+        >
+            <option style={{ fontWeight: "bolder", marginLeft: "50px" }}>請下拉選擇項目</option>
+            {getAllData(context).map(el => <option value={el['id']} key={el['id']}>{el['body']}</option>)}
         </select>
     )
 }
-
 export default SelectGroup;

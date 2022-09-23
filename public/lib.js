@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import dayjs from 'dayjs'
 const arr = [];
 export const getAllBody = (body) => {
     Object.values(body).map(el => {
@@ -23,6 +23,11 @@ export const useAxios = (config) => {
     return { res, error }
 }
 
-export const useSerial = () => { 
-    
+export const useSerial = (len) => {
+    let num = []
+    for (let i = 0; i < len; i++) {
+        let str = "A";
+        num.push(String.fromCharCode(str.charCodeAt() + i) + dayjs().format('YYYYMMDDHHmmss'))
+    }
+    return num
 }

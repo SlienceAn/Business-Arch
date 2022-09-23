@@ -1,6 +1,5 @@
 import { VscColorMode } from 'react-icons/vsc'
-import { BsArrowsFullscreen } from 'react-icons/bs'
-import { CgExport } from 'react-icons/cg'
+import { BsArrowsFullscreen, BsBoxArrowInDown } from 'react-icons/bs'
 
 const ToolNav = () => {
     const htmlToImg = () => { }
@@ -21,7 +20,7 @@ const ToolNav = () => {
                     <BsArrowsFullscreen fontSize="2rem" color='white' />
                 </div>
                 <div className='icons-bottom'>
-                    <CgExport fontSize="2rem" />
+                    <BsBoxArrowInDown fontSize="2rem" />
                 </div>
             </div>
             <div className="section">

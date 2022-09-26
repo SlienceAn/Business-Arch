@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 import '../styles/globals.css'
-import '../styles/index.scss'
+import '../styles/Index.scss'
 import '../styles/TreeView.scss'
 import '../styles/ToolNav.scss'
 

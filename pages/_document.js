@@ -12,7 +12,7 @@ export default function Document() {
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
             </Head>
             <body>
-                <nav className="w-100 text-white py-3 px-4 d-flex justify-content-between" style={{ background: '#141b25' }}>
+                <nav className="w-100 text-white py-3 px-4 d-flex justify-content-between align-items-center" style={{ background: '#141b25' }}>
                     <GiWhaleTail fontSize="2rem" />
                     <div className='d-flex gap-4'>
                         <Link href="/NewPage">

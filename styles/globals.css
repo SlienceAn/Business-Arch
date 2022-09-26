@@ -8,10 +8,10 @@ body {
   background-color: #212c3b;
 }
 nav {
-  height: 10%;
+  height: 70px;
 }
 #__next {
-  height: 90%;
+  height: calc(100% - 70px);
 }
 a {
   color: inherit;

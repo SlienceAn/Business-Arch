@@ -12,7 +12,6 @@ const SelectGroup = ({ context, getValue }) => {
                 })
             }
         })
-        //set去除重複
         return [...new Set(result.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
     }
     return (

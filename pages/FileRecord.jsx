@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import Card from '../components/Card'
 import TreeView from '../components/TreeView'
@@ -10,6 +10,9 @@ const FileRecord = () => {
     const [currentFile, setCF] = useState({})
     const [active, setActive] = useState("")
     const [isLoading, setLoading] = useState(true)
+    const [currentTree, setCT] = useState(null)
+    const treeCanvas = useRef(null)
+
     const fetchData = () => {
         axios({
             method: "GET",
@@ -37,6 +40,11 @@ const FileRecord = () => {
     useEffect(() => {
         fetchData()
     }, [])
+    useEffect(() => {
+        if (Object.keys(currentFile).length !== 0) {
+            setCT(treeCanvas)
+        }
+    }, [currentFile])
     return (
         <div className='d-flex gap-5 h-100'>
             <div className='p-2 h-100' style={{ background: "rgb(220 220 220)", width: "20%" }}>
@@ -52,21 +60,19 @@ const FileRecord = () => {
                         />)}
             </div>
             <div className='position-relative' style={{ width: '80%' }}>
-                <ToolNav />
+                <ToolNav currentTree={currentTree} />
                 {Object.keys(currentFile).length === 0 ? <div className='text-white'>No data</div> :
                     <>
                         <h4 className='text-white'>{active}</h4>
                         {isLoading ? <Loading color="#fff" /> :
-                            <div className='TreePanel' style={{ fontWeight: 'bolder' }}>
-                                <ul>
-                                    <TreeView data={currentFile} />
-                                </ul>
-                            </div>}
-                    </>
-                }
+                            <div ref={treeCanvas} className='TreePanel' style={{ fontWeight: 'bolder' }}>
+                                <ul><TreeView data={currentFile} /></ul>
+                            </div>
+                        }
+                    </>}
             </div>
         </div>
-    );
-};
+    )
+}
 
 export default FileRecord;

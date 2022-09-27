@@ -12,7 +12,6 @@ export default function FileRecord() {
     const [currentTree, setCT] = useState(null)
     const [fileID, setFileID] = useState({ ...common, params: {} })
     const [active, setActive] = useState("")
-    const [data, setData] = useState({})
     const { response: getAllResponse, status: getAllStatus } = useAxios(common)
     const { response: getFileResponse, status: getFileStatus } = useAxios(fileID)
     const treeCanvas = useRef(null)
@@ -23,10 +22,8 @@ export default function FileRecord() {
         }
     }, [fileID.params.id])
     useEffect(() => {
-        if (Object.keys(data).length !== 0) {
-            setCT(treeCanvas)
-        }
-    }, [data])
+        setCT(treeCanvas)
+    }, [getFileResponse])
     return (
         <div className='d-flex gap-5 h-100'>
             <div className='p-2 h-100' style={{ background: "rgb(220 220 220)", width: "20%" }}>
@@ -54,8 +51,7 @@ export default function FileRecord() {
                                     <ul>
                                         <TreeView data={getFileResponse.payload} />
                                     </ul>
-                                </div>
-                        }
+                                </div>}
                     </>}
             </div>
         </div>

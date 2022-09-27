@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import TreeView from '../components/TreeView'
-import { BsPlusCircleFill, BsDashCircleFill } from 'react-icons/bs';
-import { getAllBody } from '../public/lib'
 import InputModal from '../components/InputModal'
 import SelectGroup from '../components/SelectGroup';
+import { AddChild, DeleteChild } from '../components/ChildControl'
 import axios from 'axios';
 import { useSerial } from '../public/lib';
 
-const NewPage = () => {
+export default function NewPage() {
     const [context, setContext] = useState({
         body: "社會局",
         id: "Head",
@@ -53,14 +52,7 @@ const NewPage = () => {
         }
     }
     const saveFile = () => {
-        axios({
-            method: "POST",
-            url: "/api/DataPool",
-            data: {
-                context,
-                fileName
-            }
-        })
+        axios.post("/api/DataPool", { data: { context, fileName } })
     }
     return (
         <>
@@ -72,36 +64,19 @@ const NewPage = () => {
                     </div>
                     <div>
                         <div className='mb-3'>
-                            <label className='form-label' htmlFor='parentItem'>
-                                <strong>選擇添加子項目標題</strong>
-                            </label>
                             <SelectGroup context={context} getValue={getValue} />
                         </div>
                         <div className='mb-3'>
                             <div className='d-flex gap-3'>
-                                <label
-                                    className='form-label d-flex align-content-end gap-2'
-                                    htmlFor='childItem'
-                                    onClick={() => setChildVal([...childVal, {
-                                        body: "",
-                                        content: []
-                                    }])}
-                                >
-                                    <span>
-                                        <strong>添加子項</strong>
-                                    </span>
-                                    <BsPlusCircleFill fontSize="1.5rem" />
-                                </label>
-                                <label
-                                    className='form-label d-flex align-content-end gap-2'
-                                    htmlFor='childItem'
-                                    onClick={removeCol}
-                                >
-                                    <span>
-                                        <strong>刪除子項</strong>
-                                    </span>
-                                    <BsDashCircleFill fontSize="1.5rem" />
-                                </label>
+                                <AddChild onClick={() => setChildVal([...childVal, {
+                                    body: "",
+                                    content: []
+                                }])} />
+                                <DeleteChild onClick={() => {
+                                    const arr = [...childVal]
+                                    arr.pop()
+                                    setChildVal(arr)
+                                }} />
                             </div>
                             {childVal.map((el, idx) =>
                                 <input
@@ -116,6 +91,7 @@ const NewPage = () => {
                     </div>
                     <div className='d-flex gap-2'>
                         <button className='btn btn-bg text-white' onClick={postData}>確認添加</button>
+                        <button className='btn btn-bg text-white'>回到上階</button>
                         <button className='btn btn-bg text-white' onClick={() => setChildVal([])}>全部重置</button>
                         <button
                             className='btn btn-bg text-white'
@@ -141,7 +117,5 @@ const NewPage = () => {
                 />
             </InputModal>
         </>
-    );
-};
-
-export default NewPage;
+    )
+}

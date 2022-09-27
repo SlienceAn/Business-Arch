@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import axios from 'axios';
 import dayjs from 'dayjs'
 
@@ -32,6 +32,11 @@ export const useSerial = (len) => {
     return num
 }
 
-export const usePrevious = () => { 
-    
+export const usePrevious = (value) => {
+    const ref = useRef();
+    useEffect(() => {
+        ref.current = value;
+    }, [value])
+
+    return ref.current;
 }

@@ -1,26 +1,26 @@
+import { useEffect, useState } from 'react'
 import axios from 'axios';
 import dayjs from 'dayjs'
-const arr = [];
-export const getAllBody = (body) => {
-    Object.values(body).map(el => {
-        if (Array.isArray(el)) {
-            el.map(ctx => getAllBody(ctx))
-        } else {
-            arr.push(el)
-        }
-    })
-    return arr;
-}
 
 export const useAxios = (config) => {
-    let res = ""
-    let error = ""
-    axios({
-        ...config,
-    })
-        .then(result => res = result)
-        .catch(err => error = err)
-    return { res, error }
+    const [status, setStatus] = useState('ready')
+    const [error, setError] = useState('')
+    const [response, setRes] = useState({ success: false, message: '', payload: [] })
+    const fetchdata = () => {
+        setStatus('loading')
+        axios({
+            baseURL: "/api",
+            timeout: 0,
+            ...config
+        })
+            .then((res) => setRes(res.data))
+            .catch((err) => setError(err))
+            .finally(() => setStatus('end'))
+    }
+    useEffect(() => {
+        fetchdata()
+    }, [config])
+    return { status, response, error }
 }
 
 export const useSerial = (len) => {
@@ -30,4 +30,8 @@ export const useSerial = (len) => {
         num.push(String.fromCharCode(str.charCodeAt() + i) + dayjs().format('YYYYMMDDHHmmss'))
     }
     return num
+}
+
+export const usePrevious = () => { 
+    
 }

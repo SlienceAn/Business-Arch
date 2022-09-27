@@ -11,6 +11,10 @@ $barPos:25px;
     height: 200px;
     border-bottom-left-radius: 100%;
     overflow: hidden;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .menu {
@@ -79,7 +83,7 @@ $barPos:25px;
         font-size: 40px;
         color: $m;
     }
-     
+
     .icons-top {
         position: absolute;
         top: 0px;
@@ -98,6 +102,7 @@ $barPos:25px;
         left: 155px;
     }
 }
+
 //深色區塊
 .section {
     z-index: 96;
@@ -114,28 +119,31 @@ $barPos:25px;
         &,
         .cover-inside,
         .cover-inside .content {
-           position: absolute;
-           width: 400px;
-           height: 400px;
-           
+            position: absolute;
+            width: 400px;
+            height: 400px;
+
         }
-        &,    
+
+        &,
         .cover-inside {
-           top: 50%;
-           left: 50%;
-           transform: translate(-100%, -100%) rotate(16deg);
-           overflow: hidden;
+            top: 50%;
+            left: 50%;
+            transform: translate(-100%, -100%) rotate(16deg);
+            overflow: hidden;
         }
+
         .cover-inside {
-           transform: translate(50%, -50%) rotate(-32deg);
-           transform-origin: 0% 100%;
-           .content {
-              border-radius: 100%;
-              background-color: #01897d;
-              top: 100%;
-              left: 0%;
-              transform: translate(-50%, -50%);
-           }
+            transform: translate(50%, -50%) rotate(-32deg);
+            transform-origin: 0% 100%;
+
+            .content {
+                border-radius: 100%;
+                background-color: #01897d;
+                top: 100%;
+                left: 0%;
+                transform: translate(-50%, -50%);
+            }
         }
-     }
+    }
 }

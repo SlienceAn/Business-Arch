@@ -17,6 +17,7 @@ const db = getFirestore(app);
 const collection = "information";
 
 export default async function getData(req, res) {
+  //Get...
   if (req.method === "GET") {
     if (!req.query.id) {
       let payload = [];
@@ -43,6 +44,7 @@ export default async function getData(req, res) {
       }
     }
   }
+  //Post...
   if (req.method === "POST") {
     const context = req.body.context;
     const jsonContent = JSON.stringify(context)
@@ -63,6 +65,10 @@ export default async function getData(req, res) {
           message: "新增失敗," + err,
         })
       })
+  }
+  //Delete...
+  if (req.method === "DELETE") {
+
   }
 }
 

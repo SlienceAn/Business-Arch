@@ -3,12 +3,12 @@ import TreeView from '../components/TreeView'
 import InputModal from '../components/InputModal'
 import SelectGroup from '../components/SelectGroup';
 import { AddChild, DeleteChild } from '../components/ChildControl'
+import { useSerial, usePrevious } from '../public/lib';
 import axios from 'axios';
-import { useSerial } from '../public/lib';
 
 export default function NewPage() {
     const [context, setContext] = useState({
-        body: "社會局",
+        body: "",
         id: "Head",
         content: []
     })
@@ -17,6 +17,12 @@ export default function NewPage() {
     const [fileName, setfileName] = useState("")
 
     const getValue = (event, cate, idx = 0) => {
+        if (cate === "index") {
+            setContext({
+                ...context,
+                body: event.target.value
+            })
+        }
         if (cate === "select") {
             setParentVal(event.target.value)
         }
@@ -29,11 +35,6 @@ export default function NewPage() {
             }
             setChildVal(arr)
         }
-    }
-    const removeCol = () => {
-        const arr = [...childVal]
-        arr.pop()
-        setChildVal(arr)
     }
     const postData = () => {
         const newContext = Object.assign({}, context)
@@ -63,20 +64,16 @@ export default function NewPage() {
                         <h4><strong>新增檔案</strong></h4>
                     </div>
                     <div>
-                        <div className='mb-3'>
-                            <SelectGroup context={context} getValue={getValue} />
-                        </div>
+                        <input
+                            className='form-control mb-2'
+                            placeholder='輸入起始資料'
+                            onBlur={event => getValue(event, "index")}
+                        />  
+                        {context.body !== "" && <SelectGroup context={context} getValue={getValue} />}
                         <div className='mb-3'>
                             <div className='d-flex gap-3'>
-                                <AddChild onClick={() => setChildVal([...childVal, {
-                                    body: "",
-                                    content: []
-                                }])} />
-                                <DeleteChild onClick={() => {
-                                    const arr = [...childVal]
-                                    arr.pop()
-                                    setChildVal(arr)
-                                }} />
+                                <AddChild setChildVal={setChildVal} childVal={childVal} />
+                                <DeleteChild setChildVal={setChildVal} childVal={childVal} />
                             </div>
                             {childVal.map((el, idx) =>
                                 <input
@@ -91,7 +88,7 @@ export default function NewPage() {
                     </div>
                     <div className='d-flex gap-2'>
                         <button className='btn btn-bg text-white' onClick={postData}>添加</button>
-                        <button className='btn btn-bg text-white'>上階</button>
+                        <button className='btn btn-bg text-white' >回到上階</button>
                         <button className='btn btn-bg text-white' onClick={() => setChildVal([])}>重置</button>
                         <button className='btn btn-bg text-white' data-bs-toggle="modal" data-bs-target="#exampleModal">儲存</button>
                     </div>

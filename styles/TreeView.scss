@@ -9,6 +9,10 @@
     background-color: #212c3b;
     font-weight: bolder;
 
+    &>ul>li::before {
+        display: none !important;
+    }
+
     ul {
         margin: 0px 0px 0px 5px;
         list-style: none;
@@ -39,15 +43,6 @@
                 border-left: 1px solid;
                 left: -15px;
                 bottom: -7px;
-            }
-
-            &.root {
-                margin: 0px 0px 0px -5px;
-
-                &::before,
-                &::after {
-                    display: none;
-                }
             }
 
             &:last-child::after {

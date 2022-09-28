@@ -1,12 +1,15 @@
 import React from 'react';
 import { BsPlusCircleFill, BsDashCircleFill } from 'react-icons/bs'
 
-export const AddChild = ({ onClick }) => {
+export const AddChild = ({ setChildVal, childVal }) => {
     return (
         <label
             className='form-label d-flex align-content-end gap-2'
             htmlFor='childItem'
-            onClick={onClick}
+            onClick={() => setChildVal([...childVal, {
+                body: "",
+                content: []
+            }])}
         >
             <span>
                 <strong>添加子項</strong>
@@ -16,12 +19,16 @@ export const AddChild = ({ onClick }) => {
     )
 }
 
-export const DeleteChild = ({ onClick }) => {
+export const DeleteChild = ({ setChildVal, childVal }) => {
     return (
         <label
             className='form-label d-flex align-content-end gap-2'
             htmlFor='childItem'
-            onClick={onClick}
+            onClick={() => {
+                const arr = [...childVal]
+                arr.pop()
+                setChildVal(arr)
+            }}
         >
             <span>
                 <strong>刪除子項</strong>

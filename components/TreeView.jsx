@@ -18,7 +18,7 @@ const TreeView = (props) => {
         )
     } else {
         return (
-            <li className={data.body === '社會局' ? 'root' : ''}>
+            <li>
                 <span>
                     {data.body}
                 </span>

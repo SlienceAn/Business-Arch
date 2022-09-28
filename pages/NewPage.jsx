@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import TreeView from '../components/TreeView'
 import InputModal from '../components/InputModal'
 import SelectGroup from '../components/SelectGroup';
 import { AddChild, DeleteChild } from '../components/ChildControl'
+import SaveFile from '../components/SaveFile';
 import { useSerial, usePrevious } from '../public/lib';
-import axios from 'axios';
 
 export default function NewPage() {
     const [context, setContext] = useState({
@@ -14,8 +14,8 @@ export default function NewPage() {
     })
     const [childVal, setChildVal] = useState([])
     const [parentVal, setParentVal] = useState("")
-    const [fileName, setfileName] = useState("")
-
+    const saveFile = useRef(null)
+    
     const getValue = (event, cate, idx = 0) => {
         if (cate === "index") {
             setContext({
@@ -52,9 +52,6 @@ export default function NewPage() {
             addDeepObject(i, val)
         }
     }
-    const saveFile = () => {
-        axios.post("/api/DataPool", { data: { context, fileName } })
-    }
     return (
         <>
             <div className='d-flex px-4 py-2 gap-4'>
@@ -68,7 +65,7 @@ export default function NewPage() {
                             className='form-control mb-2'
                             placeholder='輸入起始資料'
                             onBlur={event => getValue(event, "index")}
-                        />  
+                        />
                         {context.body !== "" && <SelectGroup context={context} getValue={getValue} />}
                         <div className='mb-3'>
                             <div className='d-flex gap-3'>
@@ -101,12 +98,8 @@ export default function NewPage() {
                     </div>
                 </div>
             </div>
-            <InputModal title="儲存檔案" click={saveFile}>
-                <input
-                    className='form-control mb-2'
-                    placeholder='輸入存檔名稱'
-                    onChange={(event) => setfileName(event.target.value)}
-                />
+            <InputModal title="儲存檔案" click={saveFile.current !== null && saveFile.current.postFile}>
+                <SaveFile ref={saveFile} context={context} />
             </InputModal>
         </>
     )

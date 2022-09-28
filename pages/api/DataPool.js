@@ -68,7 +68,10 @@ export default async function getData(req, res) {
   }
   //Delete...
   if (req.method === "DELETE") {
-
+    res.status(200).json({
+      success: true,
+      message: "刪除成功"
+    })
   }
 }
 

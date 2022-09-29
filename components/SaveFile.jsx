@@ -4,10 +4,7 @@ import axios from 'axios'
 
 const SaveFile = forwardRef(({ context }, ref) => {
     const [fileName, setFileName] = useState("")
-    const [loading, setLoading] = useState({
-        isSubmit: false,
-        isSuccess: false
-    })
+    const [loading, setLoading] = useState(true)
     useImperativeHandle(ref, () => ({
         postFile() {
             axios.post("/api/DataPool", {
@@ -15,8 +12,7 @@ const SaveFile = forwardRef(({ context }, ref) => {
                 fileName: "demo-WTF"
             }).then(res => {
                 res.data.success ?
-                    setLoading({ isSubmit: true, isSuccess: true }) :
-                    setLoading({ isSubmit: true, isSuccess: false })
+                    setLoading(false) : setLoading(true)
             }).catch(err => {
                 console.log(err)
             })
@@ -35,15 +31,11 @@ const SaveFile = forwardRef(({ context }, ref) => {
                 placeholder='輸入存檔名稱'
                 onChange={event => setFileName(() => event.target.value)}
             />
-            {
-                (loading.isSubmit && loading.isSuccess) &&
+            {!loading ?
                 <div className='d-flex align-items-center gap-2'>
                     <BsCheckLg fontSize="1.5rem" />
                     <span><strong>存檔成功</strong></span>
-                </div>
-            }
-            {
-                (loading.isSubmit && !loading.isSuccess) &&
+                </div> :
                 <div className='d-flex align-items-center gap-2'>
                     <BsFillExclamationTriangleFill fontSize="1.5rem" />
                     <span><strong>存檔失敗</strong></span>

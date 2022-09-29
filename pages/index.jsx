@@ -15,7 +15,7 @@ export default function App() {
         <div></div>
       </div>
       <div className="text-content">
-        <span>erferferferf</span>
+        <span></span>
       </div>
     </div>
   )

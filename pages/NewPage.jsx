@@ -15,7 +15,7 @@ export default function NewPage() {
     const [childVal, setChildVal] = useState([])
     const [parentVal, setParentVal] = useState("")
     const saveFile = useRef(null)
-    
+
     const getValue = (event, cate, idx = 0) => {
         if (cate === "index") {
             setContext({
@@ -85,7 +85,7 @@ export default function NewPage() {
                     </div>
                     <div className='d-flex gap-2'>
                         <button className='btn btn-bg text-white' onClick={postData}>添加</button>
-                        <button className='btn btn-bg text-white' >回到上階</button>
+                        <button className='btn btn-bg text-white' disabled>回到上階</button>
                         <button className='btn btn-bg text-white' onClick={() => setChildVal([])}>重置</button>
                         <button className='btn btn-bg text-white' data-bs-toggle="modal" data-bs-target="#exampleModal">儲存</button>
                     </div>

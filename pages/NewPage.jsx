@@ -1,12 +1,14 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import TreeView from '../components/TreeView'
 import InputModal from '../components/InputModal'
 import SelectGroup from '../components/SelectGroup';
 import { AddChild, DeleteChild } from '../components/ChildControl'
 import SaveFile from '../components/SaveFile';
-import { useSerial, usePrevious } from '../public/lib';
+import { useSerial } from '../public/lib';
+import { useRouter } from 'next/router'
 
 export default function NewPage() {
+    const router = useRouter()
     const [context, setContext] = useState({
         body: "",
         id: "Head",
@@ -15,7 +17,6 @@ export default function NewPage() {
     const [childVal, setChildVal] = useState([])
     const [parentVal, setParentVal] = useState("")
     const saveFile = useRef(null)
-
     const getValue = (event, cate, idx = 0) => {
         if (cate === "index") {
             setContext({
@@ -52,6 +53,9 @@ export default function NewPage() {
             addDeepObject(i, val)
         }
     }
+    useEffect(() => {
+        console.log(router)
+    }, []);
     return (
         <>
             <div className='d-flex px-4 py-2 gap-4'>

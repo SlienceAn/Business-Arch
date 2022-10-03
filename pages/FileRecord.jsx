@@ -15,11 +15,8 @@ export default function FileRecord() {
     const { response: getAllResponse, status: getAllStatus } = useAxios(common)
     const { response: getFileResponse, status: getFileStatus } = useAxios(fileID)
     const treeCanvas = useRef(null)
-
     useEffect(() => {
-        if (fileID.params.id !== "") {
-            setActive(fileID.params.id)
-        }
+        if (fileID.params.id !== "") setActive(fileID.params.id)
     }, [fileID.params.id])
     useEffect(() => {
         setCT(treeCanvas)
@@ -39,19 +36,18 @@ export default function FileRecord() {
                         />)}
             </div>
             <div className='position-relative' style={{ width: '80%' }}>
-                <ToolNav currentTree={currentTree} fileName={active} />
+                <ToolNav context={getFileResponse.payload} currentTree={currentTree} fileName={active} />
                 {Object.keys(getFileResponse.payload).length === 0 ?
                     <div className='text-white'>No data</div> :
                     <>
                         <h4 className='text-white'>{active}</h4>
-                        {
-                            getFileStatus === 'loading' ?
-                                <Loading color="#fff" /> :
-                                <div ref={treeCanvas} className='TreePanel'>
-                                    <ul>
-                                        <TreeView data={getFileResponse.payload} />
-                                    </ul>
-                                </div>}
+                        {getFileStatus === 'loading' ?
+                            <Loading color="#fff" /> :
+                            <div ref={treeCanvas} className='TreePanel'>
+                                <ul>
+                                    <TreeView data={getFileResponse.payload} />
+                                </ul>
+                            </div>}
                     </>}
             </div>
         </div>

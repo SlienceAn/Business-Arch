@@ -1,3 +1,4 @@
+import Link from "next/link"
 
 export default function App() {
   return (
@@ -15,7 +16,19 @@ export default function App() {
         <div></div>
       </div>
       <div className="text-content">
-        <span></span>
+        <span className="text-header mb-4">Welcome to business-arch project !!</span>
+        <div className="d-flex gap-2">
+          <button className="btn btn-bg text-white">
+            <Link href="/NewPage">
+              <a>Get Started</a>
+            </Link>
+          </button>
+          <button className="btn btn-bg text-white">
+            <Link href="/Document">
+              <a>Document</a>
+            </Link>
+          </button>
+        </div>
       </div>
     </div>
   )

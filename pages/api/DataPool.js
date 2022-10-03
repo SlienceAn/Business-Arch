@@ -1,6 +1,9 @@
 import dayjs from 'dayjs'
 import { initializeApp } from "firebase/app";
-import { getFirestore, setDoc, doc, getDoc, getDocs, collection as Collection } from 'firebase/firestore/lite';
+import {
+  collection as Collection,
+  getFirestore, setDoc, doc, getDoc, getDocs, deleteDoc
+} from 'firebase/firestore/lite';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQAOOh_pFVWQqVhaDKLKWFVRaGeMTSylM",
@@ -68,10 +71,25 @@ export default async function getData(req, res) {
   }
   //Delete...
   if (req.method === "DELETE") {
-    res.status(200).json({
-      success: true,
-      message: "刪除成功"
-    })
+    if (req.body !== "") {
+      await deleteDoc(doc(db, collection, req.body))
+        .then(() => {
+          res.status(200).json({
+            success: true,
+            message: "刪除成功"
+          })
+        })
+        .catch(err => {
+          res.status(404).json({
+            success: false,
+            message: "刪除失敗," + err
+          })
+        })
+    }
+  }
+  //Patch...
+  if (req.method === "PATCH") { 
+    
   }
 }
 

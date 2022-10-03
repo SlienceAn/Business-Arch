@@ -2,7 +2,9 @@ import { useImperativeHandle, forwardRef, useState, useEffect } from 'react'
 import { BsFillExclamationTriangleFill, BsCheckLg } from 'react-icons/bs'
 import axios from 'axios'
 
+//...bug...
 const SaveFile = forwardRef(({ context }, ref) => {
+    console.log(ref)
     const [fileName, setFileName] = useState("")
     const [loading, setLoading] = useState(true)
     useImperativeHandle(ref, () => ({

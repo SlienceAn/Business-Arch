@@ -13,7 +13,12 @@ export default function Document() {
             </Head>
             <body>
                 <nav className="w-100 text-white py-3 px-4 d-flex justify-content-between align-items-center" style={{ background: '#141b25' }}>
-                    <GiWhaleTail fontSize="2rem" />
+                    <Link href="/">
+                        <a className='d-flex align-items-center gap-2'>
+                            <GiWhaleTail fontSize="2rem" />
+                            <span>Business-arch</span>
+                        </a>
+                    </Link>
                     <div className='d-flex gap-4'>
                         <Link href="/NewPage">
                             <a className='d-flex gap-2 align-items-center'>

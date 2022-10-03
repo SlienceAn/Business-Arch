@@ -19,9 +19,8 @@ const ToolNav = ({ context, currentTree, fileName }) => {
                 content: "確定要修改檔案嗎?",
                 requestFunc: () => {
                     router.push({
-                        //router error...
-                        pathname: "/api/DataPool",
-                        query: { page: "update", context }
+                        pathname: "/NewPage",
+                        query: { page: "update", context:JSON.stringify(context) }
                     })
                 }
             })
@@ -34,6 +33,7 @@ const ToolNav = ({ context, currentTree, fileName }) => {
                     axios.delete("/api/DataPool", { data: fileName })
                         .then(res => {
                             if (res.data.success) {
+                                //reload page
                                 router.push("/FileRecord")
                             }
                         })

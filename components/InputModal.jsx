@@ -23,6 +23,7 @@ const InputModal = ({ title, children,click }) => {
                                 type="button"
                                 className="btn btn-primary"
                                 onClick={click}
+                                data-bs-dismiss="modal"
                             >確認
                             </button>
                         </div>

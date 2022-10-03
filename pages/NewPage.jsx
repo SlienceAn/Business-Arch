@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/router'
+import { AddChild, DeleteChild } from '../components/ChildControl'
+import { useSerial } from '../public/lib';
 import TreeView from '../components/TreeView'
 import InputModal from '../components/InputModal'
 import SelectGroup from '../components/SelectGroup';
-import { AddChild, DeleteChild } from '../components/ChildControl'
 import SaveFile from '../components/SaveFile';
-import { useSerial } from '../public/lib';
-import { useRouter } from 'next/router'
 
 export default function NewPage() {
     const router = useRouter()
@@ -21,7 +21,7 @@ export default function NewPage() {
         if (cate === "index") {
             setContext({
                 ...context,
-                body: event.target.value
+                body: event
             })
         }
         if (cate === "select") {
@@ -54,7 +54,10 @@ export default function NewPage() {
         }
     }
     useEffect(() => {
-        console.log(router)
+        if (router.query['page']) {
+            const updateContext = JSON.parse(router.query['context'])
+            setContext(updateContext)
+        }
     }, []);
     return (
         <>
@@ -68,7 +71,7 @@ export default function NewPage() {
                         <input
                             className='form-control mb-2'
                             placeholder='輸入起始資料'
-                            onBlur={event => getValue(event, "index")}
+                            onBlur={event => getValue(event.target.value, "index")}
                         />
                         {context.body !== "" && <SelectGroup context={context} getValue={getValue} />}
                         <div className='mb-3'>

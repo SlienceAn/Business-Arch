@@ -2,7 +2,7 @@
 const Document = () => {
     return (
         <div>
-              document            
+            <div></div>          
         </div>
     )
 }

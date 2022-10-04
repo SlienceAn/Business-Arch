@@ -1,22 +1,20 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import { AddChild, DeleteChild } from '../components/ChildControl'
 import { useSerial } from '../public/lib';
-import TreeView from '../components/TreeView'
-import InputModal from '../components/InputModal'
+import Tree from '../components/Tree';
 import SelectGroup from '../components/SelectGroup';
 import SaveFile from '../components/SaveFile';
 
 export default function NewPage() {
     const router = useRouter()
     const [context, setContext] = useState({
-        body: "",
-        id: "Head",
-        content: []
+        body: "", id: "Head", content: []
     })
     const [childVal, setChildVal] = useState([])
     const [parentVal, setParentVal] = useState("")
-    const saveFile = useRef(null)
+    const [initBody, setBody] = useState("")
+
     const getValue = (event, cate, idx = 0) => {
         if (cate === "index") {
             setContext({
@@ -57,6 +55,7 @@ export default function NewPage() {
         if (router.query['page']) {
             const updateContext = JSON.parse(router.query['context'])
             setContext(updateContext)
+            setBody(updateContext['body'])
         }
     }, []);
     return (
@@ -71,6 +70,7 @@ export default function NewPage() {
                         <input
                             className='form-control mb-2'
                             placeholder='輸入起始資料'
+                            defaultValue={initBody}
                             onBlur={event => getValue(event.target.value, "index")}
                         />
                         {context.body !== "" && <SelectGroup context={context} getValue={getValue} />}
@@ -98,16 +98,12 @@ export default function NewPage() {
                     </div>
                 </div>
                 <div className='w-75'>
-                    <div className='TreePanel'>
-                        <ul>
-                            <TreeView data={context} />
-                        </ul>
-                    </div>
+                    <Tree>
+                        <Tree.view data={context} />
+                    </Tree>
                 </div>
             </div>
-            <InputModal title="儲存檔案" click={saveFile.current !== null && saveFile.current.postFile}>
-                <SaveFile ref={saveFile} context={context} />
-            </InputModal>
+            <SaveFile context={context} />
         </>
     )
 }

@@ -1,49 +1,59 @@
-import { useImperativeHandle, forwardRef, useState, useEffect } from 'react'
-import { BsFillExclamationTriangleFill, BsCheckLg } from 'react-icons/bs'
+import InputModal from './InputModal'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { BsFillExclamationTriangleFill, BsCheckLg } from 'react-icons/bs'
 
-//...bug...
-const SaveFile = forwardRef(({ context }, ref) => {
+export default function SaveFile({ context }) {
     const [fileName, setFileName] = useState("")
-    const [loading, setLoading] = useState(true)
-    useImperativeHandle(ref, () => ({
-        postFile() {
+    const [error, setError] = useState("")
+    const [loading, setLoading] = useState({
+        isPost: false,
+        isSuccess: false
+    })
+    const postFile = () => {
+        if (fileName) {
             axios.post("/api/DataPool", {
                 context,
-                fileName: "demo-WTF"
+                fileName
             }).then(res => {
-                res.data.success ?
-                    setLoading(false) : setLoading(true)
-            }).catch(err => {
-                console.log(err)
-            })
+                res.data.success ? setLoading({
+                    isPost: true,
+                    isSuccess: true
+                }) : setLoading({
+                    isPost: true,
+                    isSuccess: false
+                })
+            }).catch(err => setError(err.message))
+        } else {
+            setLoading({ isPost: true, isSuccess: false })
+            setError("檔案名稱不能為空")
         }
-    }))
-    // useEffect(() => {
-    //     if (loading.isSubmit) {
-    //         setLoading({ isSubmit: false, isSuccess: false })
-    //         setFileName("demo-WTF")
-    //     }
-    // }, [loading.isSubmit])
+    }
     return (
-        <>
+        <InputModal title="儲存檔案" click={postFile}>
             <input
                 className='form-control mb-2'
                 placeholder='輸入存檔名稱'
-                onChange={event => setFileName(() => event.target.value)}
+                onChange={event => setFileName(event.target.value)}
             />
-            {!loading ?
-                <div className='d-flex align-items-center gap-2'>
-                    <BsCheckLg fontSize="1.5rem" />
-                    <span><strong>存檔成功</strong></span>
-                </div> :
-                <div className='d-flex align-items-center gap-2'>
-                    <BsFillExclamationTriangleFill fontSize="1.5rem" />
-                    <span><strong>存檔失敗</strong></span>
-                </div>
-            }
-        </>
+            {(loading.isPost && loading.isSuccess) && <SaveSuccess />}
+            {(loading.isPost && !loading.isSuccess) && <SaveFail mes={error} />}
+        </InputModal>
     )
-})
-
-export default SaveFile;
+}
+const SaveSuccess = () => {
+    return (
+        <div className='d-flex align-items-center gap-2'>
+            <BsCheckLg fontSize="1.5rem" />
+            <span><strong>存檔成功!</strong></span>
+        </div>
+    )
+}
+const SaveFail = ({ mes }) => {
+    return (
+        <div className='d-flex align-items-center gap-2'>
+            <BsFillExclamationTriangleFill fontSize="1.5rem" />
+            <span><strong>{mes}</strong></span>
+        </div>
+    )
+}

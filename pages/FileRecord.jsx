@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import Card from '../components/Card'
-import TreeView from '../components/TreeView'
+import Tree from '../components/Tree'
 import ToolNav from '../components/ToolNav'
 import Loading from '../components/Loading'
 import { useAxios } from '../public/lib'
@@ -43,11 +43,10 @@ export default function FileRecord() {
                         <h4 className='text-white'>{active}</h4>
                         {getFileStatus === 'loading' ?
                             <Loading color="#fff" /> :
-                            <div ref={treeCanvas} className='TreePanel'>
-                                <ul>
-                                    <TreeView data={getFileResponse.payload} />
-                                </ul>
-                            </div>}
+                            <Tree ref={treeCanvas}>
+                                <Tree.view data={getFileResponse.payload} />
+                            </Tree>
+                        }
                     </>}
             </div>
         </div>

@@ -33,8 +33,7 @@ const ToolNav = ({ context, currentTree, fileName }) => {
                     axios.delete("/api/DataPool", { data: fileName })
                         .then(res => {
                             if (res.data.success) {
-                                //reload page
-                                router.push("/FileRecord")
+                                
                             }
                         })
                         .catch(err => console.log(err))

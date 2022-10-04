@@ -6,36 +6,39 @@ import InputModal from '../components/InputModal'
 import axios from 'axios'
 
 const ToolNav = ({ context, currentTree, fileName }) => {
-    const [text, setText] = useState({
+    const [btnGroup, setBtnGroup] = useState({
         title: "",
         content: "",
+        btnClass: "",
+        btnText: "",
         requestFunc: () => { }
     })
     const router = useRouter()
     const eventItem = (cate) => {
         if (cate === "update") {
-            setText({
+            setBtnGroup({
                 title: "修改存檔",
                 content: "確定要修改檔案嗎?",
+                btnClass: "btn btn-success",
+                btnText: "確認修改",
                 requestFunc: () => {
                     router.push({
                         pathname: "/NewPage",
-                        query: { page: "update", context:JSON.stringify(context) }
+                        query: { page: "update", context: JSON.stringify(context) }
                     })
-                }
+                },
             })
         }
         if (cate === "delete") {
-            setText({
+            setBtnGroup({
                 title: "刪除存檔",
                 content: "確定要刪除檔案嗎?",
+                btnClass: "btn btn-danger",
+                btnText: "確認刪除",
                 requestFunc: () => {
                     axios.delete("/api/DataPool", { data: fileName })
                         .then(res => {
-                            if (res.data.success) {
-                                
-                            }
-                        })
+                            if (res.data.success) {//reload page or rerender...}})
                         .catch(err => console.log(err))
                 }
             })
@@ -90,8 +93,14 @@ const ToolNav = ({ context, currentTree, fileName }) => {
                     </div>
                 </div>
             </div>
-            <InputModal title={text.title} click={text.requestFunc}>
-                <div>{text.content}</div>
+            <InputModal title={btnGroup.title} renderButton={() => <button
+                type="button"
+                className={btnGroup.btnClass}
+                onClick={btnGroup.requestFunc}
+                data-bs-dismiss="modal"
+            >{btnGroup.btnText}
+            </button>}>
+                <div>{btnGroup.content}</div>
             </InputModal>
         </>
     )

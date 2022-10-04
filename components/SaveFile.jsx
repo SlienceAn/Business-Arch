@@ -30,7 +30,12 @@ export default function SaveFile({ context }) {
         }
     }
     return (
-        <InputModal title="儲存檔案" click={postFile}>
+        <InputModal title="儲存檔案" renderButton={() => <button
+            type="button"
+            className="btn btn-primary"
+            onClick={postFile}
+        >確認存檔
+        </button>}>
             <input
                 className='form-control mb-2'
                 placeholder='輸入存檔名稱'

@@ -4,6 +4,7 @@ import Tree from '../components/Tree'
 import ToolNav from '../components/ToolNav'
 import Loading from '../components/Loading'
 import { useAxios } from '../public/lib'
+
 const common = {
     method: "GET",
     url: "/DataPool",
@@ -23,7 +24,7 @@ export default function FileRecord() {
     }, [getFileResponse])
     return (
         <div className='d-flex gap-5 h-100'>
-            <div className='p-2 h-100' style={{ background: "rgb(220 220 220)", width: "20%" }}>
+            <div className='p-2 w-20 bg-gradient' style={{ background: "rgb(220,220,220)", minHeight: "100%" }}>
                 {getAllStatus === 'loading' ?
                     <Loading color="#333" /> :
                     getAllResponse.payload.map(ctx =>
@@ -35,15 +36,19 @@ export default function FileRecord() {
                             click={() => setFileID({ ...common, params: { id: ctx.fileName } })}
                         />)}
             </div>
-            <div className='position-relative' style={{ width: '80%' }}>
-                <ToolNav context={getFileResponse.payload} currentTree={currentTree} fileName={active} />
+            <div className='position-relative w-80'>
+                <ToolNav
+                    context={getFileResponse.payload}
+                    currentTree={<div><h4>WWW</h4></div>}
+                    fileName={active}
+                />
                 {Object.keys(getFileResponse.payload).length === 0 ?
                     <div className='text-white'>No data</div> :
                     <>
                         <h4 className='text-white'>{active}</h4>
                         {getFileStatus === 'loading' ?
                             <Loading color="#fff" /> :
-                            <Tree ref={treeCanvas}>
+                            <Tree>
                                 <Tree.view data={getFileResponse.payload} />
                             </Tree>
                         }

@@ -12,7 +12,7 @@ const TreeView = (props) => {
                     {isShow ? <AiFillFolder /> : <AiFillFolderOpen />}
                 </span>
                 <ul className={isShow ? "d-none" : ""}>
-                    {data.content.map(el => <TreeView data={el} key={el.body} />)}
+                    {data.content.map(el => <TreeView data={el} key={el.id} />)}
                 </ul>
             </li>
         )

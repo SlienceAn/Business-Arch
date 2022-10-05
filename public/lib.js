@@ -31,12 +31,3 @@ export const useSerial = (len) => {
     }
     return num
 }
-
-export const usePrevious = (value) => {
-    const ref = useRef();
-    useEffect(() => {
-        ref.current = value;
-    }, [value])
-
-    return ref.current;
-}

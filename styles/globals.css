@@ -28,3 +28,12 @@ a {
 .btn-bg:hover {
   background: #7ebcb9;
 }
+.w-20 {
+  width: 20%;
+}
+.w-80 {
+  width: 80%;
+}
+.form-label:hover {
+  cursor: pointer;
+}

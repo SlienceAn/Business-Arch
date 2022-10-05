@@ -91,10 +91,9 @@ export default function NewPage() {
                         </div>
                     </div>
                     <div className='d-flex gap-2'>
-                        <button className='btn btn-bg text-white' onClick={postData}>添加</button>
-                        <button className='btn btn-bg text-white' disabled>回到上階</button>
-                        <button className='btn btn-bg text-white' onClick={() => setChildVal([])}>重置</button>
-                        <button className='btn btn-bg text-white' data-bs-toggle="modal" data-bs-target="#exampleModal">儲存</button>
+                        <button className='btn btn-bg text-white' onClick={postData}>添加項目</button>
+                        <button className='btn btn-bg text-white' onClick={() => setContext({ body: "", id: "Head", content: [] })}>資料重置</button>
+                        <button className='btn btn-bg text-white' data-bs-toggle="modal" data-bs-target="#exampleModal">儲存檔案</button>
                     </div>
                 </div>
                 <div className='w-75'>

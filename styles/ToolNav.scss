@@ -86,20 +86,29 @@ $barPos:25px;
 
     .icons-top {
         position: absolute;
-        top: 0px;
-        left: 40px;
+        text-align: center;
+        width: 79px;
+        height: 70px;
+        top: 5px;
+        left: 15px;
     }
 
     .icons-middle {
         position: absolute;
+        width: 79px;
+        height: 70px;
+        text-align: center;
         top: 75px;
-        left: 70px;
+        left: 45px;
     }
 
     .icons-bottom {
         position: absolute;
+        width: 79px;
+        height: 70px;
+        text-align: center;
         top: 115px;
-        left: 155px;
+        left: 134px;
     }
 }
 
@@ -116,6 +125,7 @@ $barPos:25px;
 
     .cover-outside {
         transform-origin: 100% 100%;
+
         &,
         .cover-inside,
         .cover-inside .content {

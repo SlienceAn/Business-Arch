@@ -6,6 +6,9 @@ import InputModal from '../components/InputModal'
 import axios from 'axios'
 
 const ToolNav = ({ context, currentTree, fileName }) => {
+    console.log(typeof currentTree)
+    console.log(currentTree)
+    const router = useRouter()
     const [btnGroup, setBtnGroup] = useState({
         title: "",
         content: "",
@@ -13,7 +16,6 @@ const ToolNav = ({ context, currentTree, fileName }) => {
         btnText: "",
         requestFunc: () => { }
     })
-    const router = useRouter()
     const eventItem = (cate) => {
         if (cate === "update") {
             setBtnGroup({
@@ -38,7 +40,8 @@ const ToolNav = ({ context, currentTree, fileName }) => {
                 requestFunc: () => {
                     axios.delete("/api/DataPool", { data: fileName })
                         .then(res => {
-                            if (res.data.success) {//reload page or rerender...}})
+                            router.reload()
+                        })
                         .catch(err => console.log(err))
                 }
             })
@@ -81,7 +84,10 @@ const ToolNav = ({ context, currentTree, fileName }) => {
                     >
                         <BsPencilSquare fontSize="2rem" color='white' />
                     </div>
-                    <div className='icons-bottom' onClick={htmlToImage}>
+                    <div
+                        className='icons-bottom'
+                        onClick={htmlToImage}
+                    >
                         <BsBoxArrowInDown fontSize="2rem" />
                     </div>
                 </div>

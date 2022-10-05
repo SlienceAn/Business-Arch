@@ -37,7 +37,7 @@ const Card = ({ name, date, active, click }) => {
                 width: 0;
                 height: 0;
                 border-style: solid;
-                border-width: 15px 0 15px 25px;
+                border-width: 20px 0 20px 30px;
                 border-color: transparent transparent transparent #01897d;
               }
             `}

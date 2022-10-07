@@ -5,10 +5,10 @@ import html2canvas from 'html2canvas'
 import InputModal from '../components/InputModal'
 import axios from 'axios'
 
-const ToolNav = ({ context, currentTree, fileName }) => {
-    console.log(typeof currentTree)
-    console.log(currentTree)
+const ToolNav = ({ context, fileName, treeCanvas }) => {
     const router = useRouter()
+    const [type, setType] = useState("")
+    const [isMenu, setMenu] = useState(true)
     const [btnGroup, setBtnGroup] = useState({
         title: "",
         content: "",
@@ -46,11 +46,43 @@ const ToolNav = ({ context, currentTree, fileName }) => {
                 }
             })
         }
+        if (cate === "download") {
+            setBtnGroup({
+                title: "下載圖片",
+                content:
+                    <div className='d-flex gap-2'>
+                        <div className='w-50'>
+                            <label>下載檔案名稱</label>
+                            <input
+                                className='form-control'
+                                defaultValue={fileName}
+                                disabled
+                            />
+                        </div>
+                        <div className='w-50'>
+                            <label>檔案格式</label>
+                            <select
+                                className='form-control'
+                                onChange={e => setType(e.target.value)}
+                            >
+                                <option value="JPG">JPG</option>
+                                <option value="JPEG">JPEG</option>
+                                <option value="PNG">PNG</option>
+                            </select>
+                        </div>
+                    </div>,
+                btnClass: "btn btn-primary",
+                btnText: "確認下載",
+                requestFunc: htmlToImage
+            })
+        }
     }
+    //type is empty...
     const htmlToImage = () => {
-        if (currentTree !== null) {
-            html2canvas(currentTree.current).then(canvas => {
-                const img = canvas.toDataURL("image/jpeg", 1)
+        if (treeCanvas !== null) {
+            console.log("type", type)
+            html2canvas(treeCanvas.current).then(canvas => {
+                const img = canvas.toDataURL(`image/${type}`, 1)
                 const link = document.createElement('a')
                 link.href = img
                 link.download = fileName
@@ -62,13 +94,13 @@ const ToolNav = ({ context, currentTree, fileName }) => {
     }
     return (
         <>
-            <div className="base">
-                <div className="menu">
+            <div className="base" style={isMenu ? { backgroundColor: "#fff" } : {}}>
+                <div className="menu" onClick={() => setMenu(!isMenu)}>
                     <div className="icon">
                         <div className="bar" />
                     </div>
                 </div>
-                <div className="icons">
+                {isMenu && <div className="icons">
                     <div className='icons-top'
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
@@ -86,18 +118,20 @@ const ToolNav = ({ context, currentTree, fileName }) => {
                     </div>
                     <div
                         className='icons-bottom'
-                        onClick={htmlToImage}
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        onClick={() => eventItem("download")}
                     >
                         <BsBoxArrowInDown fontSize="2rem" />
                     </div>
-                </div>
-                <div className="section">
+                </div>}
+                {isMenu && <div className="section">
                     <div className="cover-outside">
                         <div className="cover-inside">
                             <span className="content" />
                         </div>
                     </div>
-                </div>
+                </div>}
             </div>
             <InputModal title={btnGroup.title} renderButton={() => <button
                 type="button"
@@ -111,5 +145,4 @@ const ToolNav = ({ context, currentTree, fileName }) => {
         </>
     )
 }
-
 export default ToolNav;

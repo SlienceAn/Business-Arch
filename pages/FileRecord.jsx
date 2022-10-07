@@ -23,7 +23,7 @@ export default function FileRecord() {
         setCT(treeCanvas)
     }, [getFileResponse])
     return (
-        <div className='d-flex gap-5 h-100'>
+        <div className='d-flex gap-5' style={{minHeight:"100%"}}>
             <div className='p-2 w-20 bg-gradient' style={{ background: "rgb(220,220,220)", minHeight: "100%" }}>
                 {getAllStatus === 'loading' ?
                     <Loading color="#333" /> :
@@ -39,8 +39,8 @@ export default function FileRecord() {
             <div className='position-relative w-80'>
                 <ToolNav
                     context={getFileResponse.payload}
-                    currentTree={<div><h4>WWW</h4></div>}
                     fileName={active}
+                    treeCanvas={currentTree}
                 />
                 {Object.keys(getFileResponse.payload).length === 0 ?
                     <div className='text-white'>No data</div> :
@@ -48,7 +48,7 @@ export default function FileRecord() {
                         <h4 className='text-white'>{active}</h4>
                         {getFileStatus === 'loading' ?
                             <Loading color="#fff" /> :
-                            <Tree>
+                            <Tree ref={treeCanvas}>
                                 <Tree.view data={getFileResponse.payload} />
                             </Tree>
                         }

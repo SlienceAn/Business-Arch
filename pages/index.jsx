@@ -1,5 +1,6 @@
 import Link from "next/link"
 import backgroundImg from "../public/index.jpg"
+
 export default function App() {
   return (
     <div className="w-100 h-100 position-relative" >

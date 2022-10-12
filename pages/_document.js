@@ -1,7 +1,7 @@
 import { Html, Head, Main, NextScript } from 'next/document'
-import Link from 'next/link'
 import { BsFillBrushFill, BsChatDotsFill } from 'react-icons/bs'
 import { GiWhaleTail } from 'react-icons/gi'
+import Link from 'next/link'
 
 export default function Document() {
     return (

@@ -1,0 +1,66 @@
+.box {
+    position: relative;
+    width: 60%;
+    box-sizing: border-box;
+    padding: 5px;
+    margin: 0 auto;
+    background-color: #AAA;
+    border-radius: 0.7rem;
+}
+
+.slider {
+    background-color: chocolate;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.7rem;
+    display: flex;
+    overflow: hidden;
+    scroll-behavior: smooth;
+
+    & img {
+        min-width: 100%;
+        object-fit: contain;
+        border-radius: 0.7rem;
+    }
+}
+
+#prev,
+#next {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 16px;
+    background: #1e52ba;
+    color: #fff;
+    padding: 15px;
+    top: calc(50% - 25px);
+    left: -20px;
+}
+
+#next {
+    left: unset;
+    right: -20px;
+}
+
+.dots {
+    margin-top: 5px;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+
+    & li {
+        width: 10px;
+        height: 10px;
+        background-color: rgb(75, 73, 73);
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    &-active {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+}

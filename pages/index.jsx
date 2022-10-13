@@ -26,7 +26,7 @@ export default function App() {
           </button>
           <button className="btn btn-bg text-white">
             <Link href="/Document">
-              <a>Document</a>
+              <a>How to use</a>
             </Link>
           </button>
         </div>

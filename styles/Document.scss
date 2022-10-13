@@ -1,10 +1,13 @@
+$theme-color:#212c3b;
+$bg-color:rgb(205, 204, 204);
+
 .box {
     position: relative;
     width: 60%;
     box-sizing: border-box;
     padding: 5px;
     margin: 0 auto;
-    background-color: #AAA;
+    background-color: $bg-color;
     border-radius: 0.7rem;
 }
 
@@ -28,22 +31,22 @@
 #next {
     position: absolute;
     cursor: pointer;
-    border-radius: 16px;
-    background: #1e52ba;
-    color: #fff;
-    padding: 15px;
-    top: calc(50% - 25px);
-    left: -20px;
+    background: $bg-color;
+    border-radius: 0.7rem;
+    color: #212c3b;
+    padding: 5px;
+    top: 55%;
+    left: -25px;
 }
 
 #next {
     left: unset;
-    right: -20px;
+    right: -25px;
 }
 
 .dots {
-    margin-top: 5px;
-    padding-left: 0;
+    padding: 10px 0px 10px 0px;
+    margin: 0;
     list-style: none;
     display: flex;
     gap: 10px;
@@ -51,16 +54,55 @@
     align-items: center;
 
     & li {
-        width: 10px;
-        height: 10px;
-        background-color: rgb(75, 73, 73);
-        border-radius: 50%;
+        position: relative;
+        width: 150px;
+        height: 50px;
+        background-color: $theme-color;
         cursor: pointer;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &::after,
+        &::before {
+            position: absolute;
+            content: "";
+            width: 0;
+            height: 0;
+        }
+
+        &::after {
+            right: -25px;
+            border-style: solid;
+            border-width: 25px 0 25px 25px;
+            border-color: transparent transparent transparent $theme-color;
+            z-index: 1;
+        }
+
+        &::before {
+            left: 0px;
+            border-style: solid;
+            border-width: 25px 0 25px 25px;
+            border-color: transparent transparent transparent $bg-color;
+            z-index: 0;
+        }
+
+        &:first-child::before {
+            display: none;
+        }
     }
 
     &-active {
-        width: 20px !important;
-        height: 20px !important;
+        background-color: #3e5474 !important;
+
+        &::after {
+            border-color: transparent transparent transparent #3e5474 !important;
+        }
     }
 
 }

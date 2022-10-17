@@ -80,7 +80,6 @@ const ToolNav = ({ context, fileName, treeCanvas }) => {
     //type is empty...
     const htmlToImage = () => {
         if (treeCanvas !== null) {
-            console.log("type", type)
             html2canvas(treeCanvas.current).then(canvas => {
                 const img = canvas.toDataURL(`image/${type}`, 1)
                 const link = document.createElement('a')

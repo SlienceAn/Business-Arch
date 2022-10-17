@@ -1,7 +1,9 @@
 import { useRef, useEffect, useState } from 'react'
-import { BsCaretLeftSquareFill, BsCaretRightSquareFill } from 'react-icons/bs'
+import { BsCaretLeftSquareFill, BsCaretRightSquareFill, BsFillXCircleFill } from 'react-icons/bs'
 
-export default function Document() {
+const step = ["新增紀錄", "添加方法", "查看紀錄", "修改紀錄", "其他說明"]
+
+export default function Carousel({ isUse, setUse }) {
     const [imgWidth, setImgWidth] = useState()
     const [active, setActive] = useState(0)
     const slider = useRef(null)
@@ -30,7 +32,7 @@ export default function Document() {
     }, [])
     return (
         <section className="py-4">
-            <div className="box">
+            <div className="box text-center">
                 <span id="prev" onClick={prevFunc}>
                     <BsCaretLeftSquareFill fontSize="2rem" />
                 </span>
@@ -38,22 +40,26 @@ export default function Document() {
                     <BsCaretRightSquareFill fontSize="2rem" />
                 </span>
                 <ul id="dots" className="dots">
-                    {Array(5).fill(0).map((el, idx) =>
+                    {step.map((el, idx) =>
                         <li
                             key={idx}
                             className={active === idx ? "dots-active" : ""}
                             onClick={() => toggleDots(idx)}
                         >
-                            <span>步驟{idx + 1}</span>
+                            <span>Step.{idx + 1}-{el}</span>
                         </li>)}
                 </ul>
                 <div ref={slider} id="slider" className="slider">
-                    <img src="https://fakeimg.pl/400x200/5F9EA0/" />
-                    <img src="https://fakeimg.pl/400x200/008B8B/" />
-                    <img src="https://fakeimg.pl/400x200/556B2F/" />
+                    <img src="/step/step-one.png" />
+                    <img src="/step/step-two.png" />
+                    <img src="/step/step-three.png" />
                     <img src="https://fakeimg.pl/400x200/483D8B/" />
                     <img src="https://fakeimg.pl/400x200/8B4513/" />
                 </div>
+                <button className="btn btn-bg text-white gap-2" onClick={() => setUse(!isUse)}>
+                    <BsFillXCircleFill fontSize="1rem" className='mr-2'/>
+                    <span>Close</span>
+                </button>
             </div>
         </section>
     )

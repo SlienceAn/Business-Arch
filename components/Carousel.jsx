@@ -53,8 +53,8 @@ export default function Carousel({ isUse, setUse }) {
                     <img src="/step/step-one.png" />
                     <img src="/step/step-two.png" />
                     <img src="/step/step-three.png" />
-                    <img src="https://fakeimg.pl/400x200/483D8B/" />
-                    <img src="https://fakeimg.pl/400x200/8B4513/" />
+                    <img src="" />
+                    <img src="" />
                 </div>
                 <button className="btn btn-bg text-white gap-2" onClick={() => setUse(!isUse)}>
                     <BsFillXCircleFill fontSize="1rem" className='mr-2'/>

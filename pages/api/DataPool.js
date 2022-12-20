@@ -1,95 +1,93 @@
 import dayjs from 'dayjs'
-import { initializeApp } from "firebase/app";
-import {
-  collection as Collection,
-  getFirestore, setDoc, doc, getDoc, getDocs, deleteDoc
-} from 'firebase/firestore/lite';
+import { MongoClient } from 'mongodb'
+import { pw } from '../../Setup/pw'
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDQAOOh_pFVWQqVhaDKLKWFVRaGeMTSylM",
-  authDomain: "business-arch-data.firebaseapp.com",
-  projectId: "business-arch-data",
-  storageBucket: "business-arch-data.appspot.com",
-  messagingSenderId: "598351833136",
-  appId: "1:598351833136:web:52e235c5640004c429a5f5",
-  measurementId: "G-SXNESVYHMZ"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const collection = "information";
+const url = `mongodb+srv://beast964089:${pw}@cluster0.mb1fb2n.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(url)
+const dbName = "project_content"
 
 export default async function getData(req, res) {
   //Get...
   if (req.method === "GET") {
     if (!req.query.id) {
       let payload = [];
-      const getAllDoc = await getDocs(Collection(db, collection));
-      getAllDoc.forEach(ctx => {
-        payload.push({
-          fileName: ctx.data().fileName,
-          dateTime: ctx.data().dateTime
+      await client.connect();
+      await client.db(dbName).collection("list").find({}).toArray()
+        .then(data => {
+          data.map(el => {
+            payload.push({
+              fileName: el.fileName,
+              dateTime: el.dateTime
+            })
+          })
+          res.status(200).json({
+            success: true,
+            message: "查詢成功",
+            payload
+          })
+        }).catch(err => {
+          res.status(400).json({
+            success: true,
+            message: "查詢失敗," + err
+          })
+        }).finally(() => {
+          client.close()
         })
-      })
-      res.status(200).json({
-        success: true,
-        message: "查詢成功",
-        payload
-      })
     } else {
-      const docData = await getDoc(doc(db, collection, req.query.id))
-      if (docData.exists()) {
-        res.status(200).json({
-          success: true,
-          message: "查詢成功",
-          payload: JSON.parse(docData.data().content)
-        })
-      }
+      await client.connect()
+      await client.db(dbName).collection("list").findOne({ fileName: req.query.id })
+        .then(data => {
+          res.status(200).json({
+            success: true,
+            message: "查詢成功",
+            payload: JSON.parse(data.content)
+          })
+        }).finally(() => client.close())
     }
   }
   //Post...
   if (req.method === "POST") {
     const context = req.body.context;
     const jsonContent = JSON.stringify(context)
-    await setDoc(doc(db, collection, req.body.fileName), {
+    await client.connect()
+    await client.db(dbName).collection("list").insertOne({
       fileName: req.body.fileName,
       dateTime: dayjs().format('YYYY/MM/DD HH:mm:ss'),
       content: jsonContent
-    })
-      .then(() => {
-        res.status(200).json({
-          success: true,
-          message: "新增成功",
-        })
+    }).then(data => {
+      res.status(200).json({
+        success: true,
+        message: "新增成功",
       })
-      .catch(err => {
-        res.status(404).json({
-          success: false,
-          message: "新增失敗," + err,
-        })
+    }).catch(err => {
+      res.status(404).json({
+        success: false,
+        message: "新增失敗," + err,
       })
+    }).finally(() => client.close())
   }
   //Delete...
   if (req.method === "DELETE") {
     if (req.body !== "") {
-      await deleteDoc(doc(db, collection, req.body))
+      console.log(req.body)
+      await client.connect()
+      await client.db(dbName).collection("list").deleteOne({ fileName: req.body })
         .then(() => {
           res.status(200).json({
             success: true,
             message: "刪除成功"
           })
-        })
-        .catch(err => {
+        }).catch(err => {
           res.status(404).json({
             success: false,
-            message: "刪除失敗," + err
+            message: "刪除失敗"
           })
-        })
+        }).finally(() => client.close())
     }
   }
   //Patch...
-  if (req.method === "PATCH") { 
-    
+  if (req.method === "PATCH") {
+
   }
 }
 

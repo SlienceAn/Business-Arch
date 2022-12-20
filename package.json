@@ -20,6 +20,7 @@
     "firebase": "^9.9.4",
     "html2canvas": "^1.4.1",
     "mammoth": "^1.4.21",
+    "mongodb": "^4.13.0",
     "next": "12.1.6",
     "popper.js": "^1.16.1",
     "react": "18.2.0",

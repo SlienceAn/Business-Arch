@@ -4,15 +4,15 @@ import { MongoClient } from 'mongodb'
 
 const url = `mongodb+srv://beast964089:neverland37@cluster0.mb1fb2n.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(url)
-const dbName = "project_content"
-
+const dbName = "business_arch"
+const collection = "content"
 export default async function getData(req, res) {
   //Get...
   if (req.method === "GET") {
     if (!req.query.id) {
       let payload = [];
       await client.connect();
-      await client.db(dbName).collection("list").find({}).toArray()
+      await client.db(dbName).collection(collection).find({}).toArray()
         .then(data => {
           data.map(el => {
             payload.push({
@@ -35,7 +35,7 @@ export default async function getData(req, res) {
         })
     } else {
       await client.connect()
-      await client.db(dbName).collection("list").findOne({ fileName: req.query.id })
+      await client.db(dbName).collection(collection).findOne({ fileName: req.query.id })
         .then(data => {
           res.status(200).json({
             success: true,
@@ -50,7 +50,7 @@ export default async function getData(req, res) {
     const context = req.body.context;
     const jsonContent = JSON.stringify(context)
     await client.connect()
-    await client.db(dbName).collection("list").insertOne({
+    await client.db(dbName).collection(collection).insertOne({
       fileName: req.body.fileName,
       dateTime: dayjs().format('YYYY/MM/DD HH:mm:ss'),
       content: jsonContent
@@ -71,7 +71,7 @@ export default async function getData(req, res) {
     if (req.body !== "") {
       console.log(req.body)
       await client.connect()
-      await client.db(dbName).collection("list").deleteOne({ fileName: req.body })
+      await client.db(dbName).collection(collection).deleteOne({ fileName: req.body })
         .then(() => {
           res.status(200).json({
             success: true,

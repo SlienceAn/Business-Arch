@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AiFillFolderOpen, AiFillFolder } from 'react-icons/ai';
+import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 
 const TreeView = (props) => {
     const { data } = props
@@ -8,8 +8,10 @@ const TreeView = (props) => {
         return (
             <li>
                 <span className="d-flex align-items-center gap-1 title-box" onClick={() => setShow(!isShow)}>
-                    <span>{data.body}</span>
-                    {isShow ? <AiFillFolder /> : <AiFillFolderOpen />}
+                    <span className="bg-white text-dark px-2 py-2 rounded-3 span-body">
+                        {data.body}
+                        {isShow ? <AiFillPlusCircle fontSize="1.5rem" /> : <AiFillMinusCircle fontSize="1.5rem" />}
+                    </span>
                 </span>
                 <ul className={isShow ? "d-none" : ""}>
                     {data.content.map(el => <TreeView data={el} key={el.id} />)}
@@ -19,7 +21,7 @@ const TreeView = (props) => {
     } else {
         return (
             <li>
-                <span>
+                <span className='bg-white text-dark px-2 py-2 rounded-3 span-body'>
                     {data.body}
                 </span>
             </li>

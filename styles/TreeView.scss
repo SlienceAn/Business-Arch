@@ -1,3 +1,5 @@
+$line-color:#d3d3d3;
+
 .title-box:hover {
     cursor: pointer;
 }
@@ -14,13 +16,21 @@
     }
 
     ul {
-        margin: 0px 0px 0px 5px;
+        margin: 0px 0px 0px 20px;
         list-style: none;
-        line-height: 2em;
         font-family: "微軟正黑體";
 
+        .span-body {
+            min-width: 150px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 3px 3px 4px #01897d;
+            margin-bottom: 20px;
+        }
+
         li {
-            font-size: 20px;
+            font-size: 18px;
             position: relative;
             display: table;
 
@@ -28,21 +38,21 @@
                 position: absolute;
                 content: "";
                 top: 0px;
-                left: -15px;
+                left: -30px;
                 display: block;
                 height: 1em;
-                width: 10px;
-                border-left: 1px solid;
-                border-bottom: 1px solid;
+                width: 30px;
+                border-left: 2px solid $line-color;
+                border-bottom: 2px solid $line-color;
             }
 
             &::after {
                 position: absolute;
                 content: "";
                 display: block;
-                height: 100%;
-                border-left: 1px solid;
-                left: -15px;
+                height: calc(100% + 20px);
+                border-left: 2px solid $line-color;
+                left: -30px;
                 bottom: -7px;
             }
 

@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react'
 import { BsCaretLeftSquareFill, BsCaretRightSquareFill, BsFillXCircleFill } from 'react-icons/bs'
-
-const step = ["新增紀錄", "添加方法", "查看紀錄", "修改紀錄", "其他說明"]
+import Image from 'next/image'
+const step = ["新增紀錄", "添加方法", "查看紀錄", "修改紀錄"]
 
 export default function Carousel({ isUse, setUse }) {
     const [imgWidth, setImgWidth] = useState()
@@ -53,13 +53,16 @@ export default function Carousel({ isUse, setUse }) {
                     <img src="/step/step-one.png" />
                     <img src="/step/step-two.png" />
                     <img src="/step/step-three.png" />
-                    <img src="" />
-                    <img src="" />
+                    <img src="/step/step-four.png" />
                 </div>
-                <button className="btn btn-bg text-white gap-2" onClick={() => setUse(!isUse)}>
-                    <BsFillXCircleFill fontSize="1rem" className='mr-2'/>
-                    <span>Close</span>
-                </button>
+                <div className='py-2'>
+                    <button className="btn btn-bg text-white d-inline-flex align-items-center" onClick={() => setUse(!isUse)} style={{
+                        gap: '10px'
+                    }}>
+                        <BsFillXCircleFill fontSize="1rem" className='mr-2' />
+                        <span>Close</span>
+                    </button>
+                </div>
             </div>
         </section>
     )

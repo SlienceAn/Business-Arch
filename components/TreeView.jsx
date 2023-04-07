@@ -21,7 +21,7 @@ const TreeView = (props) => {
     } else {
         return (
             <li>
-                <span className='bg-white text-dark px-2 py-2 rounded-3 span-body'>
+                <span className={data.body !== "" ? 'bg-white text-dark px-2 py-2 rounded-3 span-body' : ''}>
                     {data.body}
                 </span>
             </li>

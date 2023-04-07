@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Link from "next/link"
 import backgroundImg from "../public/index.jpg"
 import Carousel from "../components/Carousel"
@@ -18,9 +18,7 @@ const BackImage = () => {
     </div>
   )
 }
-const TextContent = (props) => {
-  const { isLoading, isUse, setUse } = props
-  console.log(isLoading)
+const TextContent = ({ isUse, isLoading, setUse }) => {
   return (
     <div className={isLoading ? "text-content" : "text-content text-content-anime"}>
       <span className="text-header mb-4">Welcome to business-arch project !!</span>
@@ -39,7 +37,6 @@ const TextContent = (props) => {
 }
 export default function App() {
   const [isUse, setUse] = useState(false)
-  const [fuck, setfff] = useState(0)
   const [isLoading, setLoad] = useState(false)
   useEffect(() => { if (isUse === true) setLoad(true) }, [isUse])
   return (

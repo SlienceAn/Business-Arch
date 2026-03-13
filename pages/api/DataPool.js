@@ -2,10 +2,10 @@ import dayjs from 'dayjs'
 import { MongoClient } from 'mongodb'
 // import { pw } from '../../Setup/pw'
 
-const url = `mongodb+srv://beast964089:neverland37@cluster0.mb1fb2n.mongodb.net/?retryWrites=true&w=majority`;
+const url = process.env.MONGODB_URI
 const client = new MongoClient(url)
-const dbName = "business_arch"
-const collection = "content"
+const dbName = process.env.DB_NAME
+const collection = process.env.COLLECTION
 export default async function getData(req, res) {
   //Get...
   if (req.method === "GET") {
